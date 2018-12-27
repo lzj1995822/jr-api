@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- 用户关联表 -->
+    <changeSet id="20181002-06" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_role_menu"/>
+        </preConditions>
+        <comment>删表 角色菜单</comment>
+        <dropTable tableName="ck_id_role_menu"/>
+    </changeSet>
+
+    <changeSet id="20181102-05" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_organization_role"/>
+        </preConditions>
+        <comment>删表 组织角色</comment>
+        <dropTable tableName="ck_id_organization_role"/>
+    </changeSet>
+
+    <changeSet id="20181002-04" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_role"/>
+        </preConditions>
+        <comment>删表 角色</comment>
+        <dropTable tableName="ck_id_role"/>
+    </changeSet>
+
+    <changeSet id="20181102-03" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_principal_organization"/>
+        </preConditions>
+        <comment>删表 用户组织</comment>
+        <dropTable tableName="ck_id_principal_organization"/>
+    </changeSet>
+
+    <changeSet id="20181102-02" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_organization"/>
+        </preConditions>
+        <comment>删表 组织</comment>
+        <dropTable tableName="ck_id_organization"/>
+    </changeSet>
+
+    <changeSet id="20181002-01" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_principal"/>
+        </preConditions>
+        <comment>删表 用户</comment>
+        <dropTable tableName="ck_id_principal"/>
+    </changeSet>
+    <!-- 用户关联表 -->
+
+    <changeSet id="20181002-07" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_property_config"/>
+        </preConditions>
+        <comment>删表 属性</comment>
+        <dropTable tableName="ck_id_property_config"/>
+    </changeSet>
+
+    <changeSet id="20181002-08" author="jerry">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_accessory"/>
+        </preConditions>
+        <comment>删表 附件</comment>
+        <dropTable tableName="ck_id_accessory"/>
+    </changeSet>
+
+    <changeSet id="20181216-10" author="asher">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_code_record"/>
+        </preConditions>
+        <comment>删表 编号生成实例记录表</comment>
+        <dropTable tableName="ck_id_code_record"/>
+    </changeSet>
+
+    <changeSet id="20181216-11" author="asher">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="ck_id_code_config"/>
+        </preConditions>
+        <comment>删表 编号模板配置表</comment>
+        <dropTable tableName="ck_id_code_config"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>
