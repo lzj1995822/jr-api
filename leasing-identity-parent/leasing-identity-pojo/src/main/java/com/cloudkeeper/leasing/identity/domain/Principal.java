@@ -57,4 +57,12 @@ public class Principal extends BaseEntity {
     @Column(length = 1000)
     private String note;
 
+    /** 备注 */
+    @ApiModelProperty(value = "备注", position = 22)
+    @Column(length = 200)
+    private String remark;
+
+    /** 状态 */
+    @ApiModelProperty(value = "状态", position = 24)
+    private Integer status;
 }
