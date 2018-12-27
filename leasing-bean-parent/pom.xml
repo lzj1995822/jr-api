@@ -19,8 +19,6 @@
     <modules>
         <module>leasing-bean-base</module>
         <module>leasing-bean-identity</module>
-        <module>leasing-bean-process</module>
-        <module>leasing-bean-company</module>
     </modules>
 
     <dependencies>

@@ -45,8 +45,8 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("租赁系统 RESTful APIs")
-                .description("租赁系统")
+                .title("句容市新时代文明实践中心 RESTful APIs")
+                .description("句容市新时代文明实践中心")
 //                .termsOfServiceUrl("http://localhost:8080/")
                 //.contact(contact)
                 .version("1.0")

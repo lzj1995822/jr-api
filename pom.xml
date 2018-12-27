@@ -21,11 +21,7 @@
         <module>leasing-bean-parent</module>
         <module>leasing-base-parent</module>
         <module>leasing-identity-parent</module>
-        <module>leasing-process-parent</module>
-        <module>leasing-company-parent</module>
         <module>leasing-applications-parent</module>
-        <module>leasing-calculate-parent</module>
-        <module>leasing-subject-parent</module>
     </modules>
 
     <properties>

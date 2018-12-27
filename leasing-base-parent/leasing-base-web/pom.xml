@@ -39,24 +39,6 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.cloudkeeper.leasing</groupId>
-            <artifactId>leasing-company-pojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.cloudkeeper.leasing</groupId>
-            <artifactId>leasing-calculate-pojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.cloudkeeper.leasing</groupId>
-            <artifactId>leasing-subject-pojo</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>
