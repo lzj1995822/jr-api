@@ -13,25 +13,25 @@ import static com.cloudkeeper.leasing.utils.DefinitionUtil.generateJavaFile;
 public class GenerateTemplateCodeUtil {
 
     /** 表名*/
-    static String TABLE_NAME = "ck_id_code_record";
+    static String TABLE_NAME = "jr_org_person";
 
     /** 创建liquibase xml 的id*/
     static final String CHANGE_SET_ID = "20180323-01";
 
     /** 类名*/
-    static final String CLASS_NAME = "CodeRecord";
+    static final String CLASS_NAME = "OrgPerson";
 
     /** 类注释*/
-    static final String CLASS_EXPLAIN = "编码生成记录";
+    static final String CLASS_EXPLAIN = "组织架构人员";
 
     /** 子工程名称*/
     static final String PROJECT_NAME = "identity";
 
     /** 注释 - 作者*/
-    static String DOC_AUTHOR = "asher";
+    static String DOC_AUTHOR = "wj";
 
     /** 项目根目录 */
-    static final String PROJECT_DIR = "C:\\Users\\tracyAsher\\Documents\\jz-leasing-base\\";
+    static final String PROJECT_DIR = "D:\\jr-api\\jr-api\\";
 
     /** 生成domain*/
     @Test

@@ -13,15 +13,18 @@ import com.cloudkeeper.leasing.identity.dto.principal.PrincipalSearchable;
 import com.cloudkeeper.leasing.identity.service.OrganizationService;
 import com.cloudkeeper.leasing.identity.service.PrincipalService;
 import com.cloudkeeper.leasing.identity.vo.PrincipalVO;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -178,5 +181,14 @@ public class PrincipalControllerImpl implements PrincipalController {
     public List<PrincipalTO> findAllTO(@ApiParam(value = "用户id集合", required = true) @RequestBody List<String> ids) {
         List<Principal> principalList = principalService.findAllById(ids);
         return Principal.convert(principalList, PrincipalTO.class);
+    }
+    @ApiOperation(value = "获取用户下的所有信息", notes = "获取用户下的所有信息", position = 1)
+    @GetMapping("/get/{id}")
+    public Result<Principal> getOnePrincipal(@PathVariable String id) {
+        Principal principal = principalService.findById(id);
+        if (principal == null) {
+            return Result.ofNotFound();
+        }
+        return Result.of(principal);
     }
 }

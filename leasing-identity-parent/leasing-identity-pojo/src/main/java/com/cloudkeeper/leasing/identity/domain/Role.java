@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * 角色
@@ -22,7 +21,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ck_id_role")
+@Table(name = "jr_role")
 public class Role extends BaseEntity {
 
     /** 编码 */
@@ -39,5 +38,8 @@ public class Role extends BaseEntity {
     @ApiModelProperty(value = "描述", position = 14)
     @Column(length = 1000)
     private String note;
+
+    @OneToMany(mappedBy = "role")
+    private List<RoleMenu> roleMenus;
 
 }

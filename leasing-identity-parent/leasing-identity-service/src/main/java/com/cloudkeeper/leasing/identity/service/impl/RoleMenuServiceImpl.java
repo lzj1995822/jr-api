@@ -49,7 +49,6 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
         return menuCodeList.stream().map(menuCode -> {
             RoleMenu roleMenu = new RoleMenu();
             roleMenu.setRoleId(roleId);
-            roleMenu.setMenuCode(menuCode);
             return roleMenuRepository.save(roleMenu);
         }).collect(Collectors.toList());
     }
@@ -57,6 +56,7 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     @Nonnull
     @Override
     public List<String> findAllMenuCodeByPrincipalId(@Nonnull String principalId) {
-        return roleMenuRepository.findAllMenuCodeByPrincipalId(principalId);
+//        return roleMenuRepository.findAllMenuCodeByPrincipalId(principalId);
+        return null;
     }
 }

@@ -56,4 +56,7 @@ public class PrincipalAddDTO extends BaseEditDTO {
     @Length(max = 1000)
     private String note;
 
+    /** 角色id */
+    @ApiModelProperty(value = "角色id", position = 24)
+    private String roleId;
 }

@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 用户
@@ -24,7 +22,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ck_id_principal")
+@Table(name = "jr_user")
 public class Principal extends BaseEntity {
 
     /** 登录名 */
@@ -62,7 +60,20 @@ public class Principal extends BaseEntity {
     @Column(length = 200)
     private String remark;
 
-    /** 状态 */
-    @ApiModelProperty(value = "状态", position = 24)
-    private Integer status;
+    /** 角色id */
+    @ApiModelProperty(value = "角色id", position = 24)
+    private String roleId;
+
+    @OneToOne
+    @JoinColumn(name = "roleId", updatable = false, insertable = false)
+    private Role role;
+
+    /** 组织id */
+    @ApiModelProperty(value = "组织id", position = 26)
+    private String orgId;
+
+    /** 组织类型 */
+    @ApiModelProperty(value = "组织类型", position = 28)
+    private String type;
+
 }

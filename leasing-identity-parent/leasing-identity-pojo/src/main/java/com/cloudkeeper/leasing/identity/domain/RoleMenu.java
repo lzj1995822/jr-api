@@ -1,6 +1,7 @@
 package com.cloudkeeper.leasing.identity.domain;
 
 import com.cloudkeeper.leasing.base.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ck_id_role_menu")
+@Table(name = "jr_role_menu")
 public class RoleMenu extends BaseEntity {
 
     /** 角色id */
@@ -30,6 +31,7 @@ public class RoleMenu extends BaseEntity {
 
     /** 角色 */
     @ApiModelProperty(value = "角色", position = 11, required = true)
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "roleId", insertable = false, updatable = false)
     private Role role;
@@ -37,5 +39,11 @@ public class RoleMenu extends BaseEntity {
     /** 菜单编码 */
     @ApiModelProperty(value = "菜单编码", position = 13, required = true)
     @Column(length = 50)
-    private String menuCode;
+    private String menuId;
+
+//    /** 菜单 */
+//    @ApiModelProperty(value = "菜单", position = 15)
+//    @OneToOne
+//    @JoinColumn(name = "menuId", insertable = false, updatable = false)
+//    private Menu menu;
 }

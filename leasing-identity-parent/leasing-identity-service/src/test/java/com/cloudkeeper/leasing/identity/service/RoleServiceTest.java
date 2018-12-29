@@ -35,7 +35,6 @@ public class RoleServiceTest {
     @Before
     public void setUp() {
         role = roleService.save(new Role().setCode(TEST_CODE));
-        roleMenuService.save(new RoleMenu().setRoleId(role.getId()).setMenuCode("aa"));
     }
 
     @After
