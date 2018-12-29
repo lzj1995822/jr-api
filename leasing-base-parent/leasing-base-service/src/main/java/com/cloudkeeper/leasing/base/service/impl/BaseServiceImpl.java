@@ -1,5 +1,6 @@
 package com.cloudkeeper.leasing.base.service.impl;
 
+import com.cloudkeeper.leasing.base.constant.AuthorizationConstants;
 import com.cloudkeeper.leasing.base.domain.BaseEntity;
 import com.cloudkeeper.leasing.base.dto.BaseSearchable;
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
@@ -28,6 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
@@ -50,6 +52,9 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     /** JPA查询工厂 */
     protected JPAQueryFactory queryFactory;
+
+    @Autowired
+    protected HttpServletRequest request;
 
     /**
      * 子类实现该方法
@@ -449,5 +454,10 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     @Override
     public NativeQuery getNativeQuery(@Nonnull String sql) {
         return (NativeQuery) entityManager.createNativeQuery(sql);
+    }
+
+    @Override
+    public Object getCurrentPrincipal() {
+        return getBaseRepository().findById((String) request.getSession().getAttribute(AuthorizationConstants.CURRENT_USER_ID));
     }
 }

@@ -61,4 +61,8 @@ public class ActivityVO extends BaseVO {
     @ApiModelProperty(value = "是否为特色活动", position = 26)
     private String isSpecial;
 
+    /** 活动类型 */
+    @ApiModelProperty(value = "活动类型", position = 28)
+    private String activityType;
+
 }

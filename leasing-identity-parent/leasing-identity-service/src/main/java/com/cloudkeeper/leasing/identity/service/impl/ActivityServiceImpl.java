@@ -2,13 +2,23 @@ package com.cloudkeeper.leasing.identity.service.impl;
 
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import com.cloudkeeper.leasing.base.service.impl.BaseServiceImpl;
-import com.cloudkeeper.leasing.identity.domain.Activity;
+import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
+import com.cloudkeeper.leasing.identity.domain.*;
+import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.ActivityService;
+import com.cloudkeeper.leasing.identity.service.CountryService;
+import com.cloudkeeper.leasing.identity.service.OrgCenterService;
+import com.cloudkeeper.leasing.identity.service.OrgRoomService;
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 活动 service
@@ -20,6 +30,12 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
     /** 活动 repository */
     private final ActivityRepository activityRepository;
+
+    private final OrgRoomService orgRoomService;
+
+    private final OrgCenterService orgCenterService;
+
+    private final CountryService countryService;
 
     @Override
     protected BaseRepository<Activity> getBaseRepository() {
@@ -37,4 +53,23 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 .withMatcher("isSpecial", ExampleMatcher.GenericPropertyMatchers.contains());
     }
 
+    @Override
+    public Page<Activity> pageByTypeAndPermission(Pageable pageable, ActivitySearchable activitySearchable) {
+        Principal principal = (Principal) getCurrentPrincipal();
+        QActivity qActivity = QActivity.activity;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        String orgId = principal.getOrgId();
+        String type = null;
+        if (principal.getType().equals( ProcessConstants.ORG_CENTER) || (principal.getType().equals( ProcessConstants.ORG_ROOM))){
+            OrgCenter orgCenter = orgCenterService.findById(orgId);
+            booleanBuilder.and(qActivity.activityType.eq(orgCenter.getType()));
+            booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
+        } else if  (principal.getType().equals( ProcessConstants.ORG_COUNTRY)){
+            Country country = countryService.findById(orgId);
+            booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
+            booleanBuilder.and(qActivity.createdBy.eq(country.getId()));
+            booleanBuilder.or(qActivity.type.eq(ProcessConstants.ACT_TYPE_CENTER));
+        }
+        return super.findAll(booleanBuilder, pageable);
+    }
 }

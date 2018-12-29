@@ -13,16 +13,16 @@ import static com.cloudkeeper.leasing.utils.DefinitionUtil.generateJavaFile;
 public class GenerateTemplateCodeUtil {
 
     /** 表名*/
-    static String TABLE_NAME = "jr_org_person";
+    static String TABLE_NAME = "jr_town";
 
     /** 创建liquibase xml 的id*/
     static final String CHANGE_SET_ID = "20180323-01";
 
     /** 类名*/
-    static final String CLASS_NAME = "OrgPerson";
+    static final String CLASS_NAME = "Town";
 
     /** 类注释*/
-    static final String CLASS_EXPLAIN = "组织架构人员";
+    static final String CLASS_EXPLAIN = "镇";
 
     /** 子工程名称*/
     static final String PROJECT_NAME = "identity";

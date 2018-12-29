@@ -436,4 +436,10 @@ public interface BaseService<T extends BaseEntity> {
      * @return
      */
     NativeQuery getNativeQuery(@Nonnull String sql);
+
+    /**
+     * 获取当前登录用户
+     * @return
+     */
+    Object getCurrentPrincipal();
 }
