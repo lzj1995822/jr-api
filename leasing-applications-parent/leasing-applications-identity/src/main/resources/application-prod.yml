@@ -1,4 +1,8 @@
+web:
+  upload-path: D:/JURONG/
 spring:
+  resources:
+    static-locations: file:${web.upload-path}
   # 数据库配置
   datasource:
     # 连接地址

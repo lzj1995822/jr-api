@@ -1,5 +1,9 @@
+web:
+  upload-path: D:/JURONG/
 spring:
   # 数据库配置
+  resources:
+    static-locations: file:${web.upload-path}
   datasource:
     # 连接地址
     url: jdbc:mysql://cdb-44f9mrs9.gz.tencentcdb.com:10069/jr_api?useUnicode=true&characterEncoding=utf-8&useSSL=false
