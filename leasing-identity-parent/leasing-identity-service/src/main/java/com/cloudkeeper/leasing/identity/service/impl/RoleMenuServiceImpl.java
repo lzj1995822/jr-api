@@ -46,9 +46,10 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     @Transactional(rollbackFor = Exception.class)
     public List<RoleMenu> save(@Nonnull String roleId, @Nonnull List<String> menuCodeList) {
         roleMenuRepository.deleteAllByRoleId(roleId);
-        return menuCodeList.stream().map(menuCode -> {
+        return menuCodeList.stream().map(menuId -> {
             RoleMenu roleMenu = new RoleMenu();
             roleMenu.setRoleId(roleId);
+            roleMenu.setMenuId(menuId);
             return roleMenuRepository.save(roleMenu);
         }).collect(Collectors.toList());
     }
