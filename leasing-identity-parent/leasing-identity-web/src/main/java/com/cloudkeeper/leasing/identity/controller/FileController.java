@@ -14,7 +14,6 @@ import java.io.IOException;
  * 文件上传下载 controller
  * @author jerry
  */
-@Api(value = "文件传输", tags = "文件传输")
 @RequestMapping("/file")
 public interface FileController {
 

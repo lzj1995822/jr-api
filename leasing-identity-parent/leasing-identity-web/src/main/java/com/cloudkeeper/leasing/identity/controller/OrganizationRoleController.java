@@ -15,7 +15,6 @@ import java.util.List;
  * 组织角色 controller
  * @author jerry
  */
-@Api(value = "组织角色", tags = "组织角色")
 @RequestMapping("/organizationRole")
 public interface OrganizationRoleController {
 

@@ -15,7 +15,6 @@ import java.util.List;
  * 用户组织 controller
  * @author jerry
  */
-@Api(value = "用户组织", tags = "用户组织")
 @RequestMapping("/principalOrganization")
 public interface PrincipalOrganizationController {
 

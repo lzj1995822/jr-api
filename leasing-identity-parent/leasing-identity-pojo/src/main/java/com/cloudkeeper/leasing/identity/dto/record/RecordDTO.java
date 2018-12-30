@@ -45,4 +45,8 @@ public class RecordDTO extends BaseEditDTO {
     @ApiModelProperty(value = "积分", position = 18)
     private Double score;
 
+    /** 志愿者 */
+    @ApiModelProperty(value = "志愿者", position = 22)
+    private String volunteers;
+
 }
