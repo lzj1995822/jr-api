@@ -18,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 活动 service
@@ -66,12 +68,11 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             booleanBuilder.and(qActivity.activityType.eq(orgCenter.getType()));
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
         } else if (principal.getType().equals( ProcessConstants.ORG_ROOM)) {
-//            countryService.findAllb
-
             OrgRoom orgRoom = orgRoomService.findById(orgId);
+            List<Country> allByTownId = countryService.findAllByTownId(orgRoom.getTownId());
             booleanBuilder.and(qActivity.activityType.eq(orgRoom.getType()))
-                    .and(qActivity.creator.type.eq(ProcessConstants.ORG_CENTER));
-//                            .or(qActivity.creator.id.in()))
+                    .and(qActivity.creator.type.eq(ProcessConstants.ORG_CENTER)
+                            .or(qActivity.creator.id.in(allByTownId.stream().map(Country::getId).collect(Collectors.toList()))));
         } else if  (principal.getType().equals( ProcessConstants.ORG_COUNTRY)){
             Country country = countryService.findById(orgId);
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));

@@ -38,6 +38,6 @@ public class CountryServiceImpl extends BaseServiceImpl<Country> implements Coun
 
     @Override
     public List<Country> findAllByTownId(String townId) {
-        return countryRepository.findAllByTownId();
+        return countryRepository.findAllByTownid(townId);
     }
 }

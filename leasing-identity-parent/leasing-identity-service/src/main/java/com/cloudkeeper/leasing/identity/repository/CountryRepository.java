@@ -16,5 +16,5 @@ import java.util.Optional;
 public interface CountryRepository extends BaseRepository<Country> {
    Optional<Country> findById(String id);
 
-    List<Country> findAllBy();
+    List<Country> findAllByTownid(String townId);
 }

@@ -65,7 +65,7 @@ public class Activity extends BaseEntity {
     private String activityType;
 
     @OneToOne
-    @JoinColumn(name = "createdy", updatable = false, insertable = false)
+    @JoinColumn(name = "createdBy", updatable = false, insertable = false)
     private Principal creator;
 
 }
