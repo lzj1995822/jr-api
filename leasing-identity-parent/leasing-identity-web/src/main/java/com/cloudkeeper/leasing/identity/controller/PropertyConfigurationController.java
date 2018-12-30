@@ -20,7 +20,6 @@ import java.util.List;
  * @version V1.0
  * @since 2018/9/30
  */
-@Api(value = "系统属性", tags = "系统属性")
 @RequestMapping("/propertyConfiguration")
 public interface PropertyConfigurationController {
 

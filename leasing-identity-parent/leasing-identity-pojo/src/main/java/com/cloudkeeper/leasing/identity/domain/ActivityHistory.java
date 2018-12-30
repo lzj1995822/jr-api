@@ -9,25 +9,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.jdo.annotations.Join;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
- * 活动
- * @author wj
+ * 活动记录
+ * @author hf
  */
-@ApiModel(value = "活动", description = "活动")
+@ApiModel(value = "活动记录", description = "活动记录")
 @Getter
 @Setter
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "jr_activity")
-public class Activity extends BaseEntity {
-
+@Table(name = "jr_activity_history")
+public class ActivityHistory extends BaseEntity {
     /** 名称 */
     @ApiModelProperty(value = "名称", position = 10)
     private String name;
@@ -54,18 +53,17 @@ public class Activity extends BaseEntity {
 
     /** 开始时间 */
     @ApiModelProperty(value = "开始时间", position = 22)
-    private Date beginAt;
+    private LocalDateTime beginAt;
 
     /** 结束时间 */
     @ApiModelProperty(value = "结束时间", position = 24)
-    private Date endAt;
-    
+    private LocalDateTime endAt;
+
     /** 活动类型 */
     @ApiModelProperty(value = "活动类型", position = 28)
     private String activityType;
-
-    @OneToOne
-    @JoinColumn(name = "createdBy", updatable = false, insertable = false)
-    private Principal creator;
+    /** 活动id */
+    @ApiModelProperty(value = "活动id", position = 30)
+    private String activityid;
 
 }

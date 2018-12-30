@@ -21,7 +21,6 @@ import java.util.List;
  * 系统附件 controller
  * @author asher
  */
-@Api(value = "系统附件", tags = "系统附件")
 @RequestMapping("/accessory")
 public interface AccessoryController {
 

@@ -4,6 +4,8 @@ import com.cloudkeeper.leasing.identity.domain.Country;
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import java.util.Optional;
 
 /**
@@ -14,4 +16,5 @@ import java.util.Optional;
 public interface CountryRepository extends BaseRepository<Country> {
    Optional<Country> findById(String id);
 
+    List<Country> findAllByTownid(String townId);
 }

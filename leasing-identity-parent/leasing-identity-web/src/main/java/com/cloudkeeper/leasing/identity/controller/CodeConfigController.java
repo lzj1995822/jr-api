@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 编码配置 controller
  * @author asher
  */
-@Api(value = "编码配置", tags = "编码配置")
 @RequestMapping("/codeConfig")
 public interface CodeConfigController extends BaseController<CodeConfigDTO, CodeConfigSearchable, CodeConfigVO> {
 

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 编码生成记录 controller
  * @author asher
  */
-@Api(value = "编码生成记录", tags = "编码生成记录")
 @RequestMapping("/codeRecord")
 public interface CodeRecordController extends BaseController<CodeRecordDTO, CodeRecordSearchable, CodeRecordVO> {
 
