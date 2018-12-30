@@ -117,7 +117,7 @@ public class CodeRecordServiceImpl extends BaseServiceImpl<CodeRecord> implement
      * @return 最大流水号
      */
     private synchronized Integer getMaxSerialNumber(@Nonnull String configId, @Nonnull String serialNumberCycle) {
-        QCodeRecord qCodeRecord = QCodeRecord.codeRecord;
+    	QCodeRecord qCodeRecord = QCodeRecord.codeRecord;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         booleanBuilder.and(qCodeRecord.configId.eq(configId));
         LocalDateTime now = LocalDateTime.now();
