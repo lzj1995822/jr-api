@@ -74,7 +74,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                     .and(qActivity.creator.type.eq(ProcessConstants.ORG_CENTER)
                             .or(qActivity.creator.id.in(allByTownId.stream().map(Country::getId).collect(Collectors.toList()))));
         } else if  (principal.getType().equals( ProcessConstants.ORG_COUNTRY)){
-            Country country = countryService.findById(orgId);
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
             booleanBuilder.and(qActivity.createdBy.eq(principal.getId()));
             booleanBuilder.or(qActivity.type.eq(ProcessConstants.ACT_TYPE_CENTER));
