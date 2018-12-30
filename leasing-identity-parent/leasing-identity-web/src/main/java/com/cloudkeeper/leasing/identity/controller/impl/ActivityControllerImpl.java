@@ -9,10 +9,13 @@ import com.cloudkeeper.leasing.identity.dto.activity.ActivityDTO;
 import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.service.ActivityService;
 import com.cloudkeeper.leasing.identity.vo.ActivityVO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,8 +34,10 @@ public class ActivityControllerImpl extends BaseControllerImpl<Activity, Activit
     return activityService;
     }
 
+    @ApiOperation(value = "分页查询", notes = "分页查询")
     @Override
-    public Result<Page<ActivityVO>> page(ActivitySearchable searchable, Pageable pageable) {
+    public Result<Page<ActivityVO>> page(@ApiParam(value = "查询条件", required = true) @RequestBody ActivitySearchable searchable,
+                                         @ApiParam(value = "分页条件", required = true) Pageable pageable) {
         Page<Activity> activities = activityService.pageByTypeAndPermission(pageable, searchable);
         Page<ActivityVO> convert = Activity.convert(activities, ActivityVO.class);
         return Result.of(convert);

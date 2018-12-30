@@ -6,10 +6,7 @@ import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
 import com.cloudkeeper.leasing.identity.domain.*;
 import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
-import com.cloudkeeper.leasing.identity.service.ActivityService;
-import com.cloudkeeper.leasing.identity.service.CountryService;
-import com.cloudkeeper.leasing.identity.service.OrgCenterService;
-import com.cloudkeeper.leasing.identity.service.OrgRoomService;
+import com.cloudkeeper.leasing.identity.service.*;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * 活动 service
@@ -36,6 +34,8 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     private final OrgCenterService orgCenterService;
 
     private final CountryService countryService;
+
+    private final PrincipalService principalService;
 
     @Override
     protected BaseRepository<Activity> getBaseRepository() {
@@ -55,12 +55,12 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
 
     @Override
     public Page<Activity> pageByTypeAndPermission(Pageable pageable, ActivitySearchable activitySearchable) {
-        Principal principal = (Principal) getCurrentPrincipal();
+        Principal principal = (Principal)((Optional) principalService.getCurrentPrincipal()).get();
         QActivity qActivity = QActivity.activity;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         String orgId = principal.getOrgId();
         String type = null;
-        if (principal.getType().equals( ProcessConstants.ORG_CENTER) || (principal.getType().equals( ProcessConstants.ORG_ROOM))){
+        if (principal.getType().equals(ProcessConstants.ORG_CENTER) || (principal.getType().equals( ProcessConstants.ORG_ROOM))){
             OrgCenter orgCenter = orgCenterService.findById(orgId);
             booleanBuilder.and(qActivity.activityType.eq(orgCenter.getType()));
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));

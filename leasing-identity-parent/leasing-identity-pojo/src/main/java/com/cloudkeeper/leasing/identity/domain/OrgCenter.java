@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * 分中心
  * @author wj
  */
-@ApiModel(value = "分中心", description = "分中心")
+@ApiModel(value = "分中心组织", description = "分中心组织")
 @Getter
 @Setter
 @Accessors(chain = true)
