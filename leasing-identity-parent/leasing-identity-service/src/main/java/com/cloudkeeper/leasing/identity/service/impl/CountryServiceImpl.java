@@ -32,7 +32,8 @@ public class CountryServiceImpl extends BaseServiceImpl<Country> implements Coun
     public ExampleMatcher defaultExampleMatcher() {
         return super.defaultExampleMatcher()
                 .withMatcher("des", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("townid", ExampleMatcher.GenericPropertyMatchers.contains());
     }
 
     @Override

@@ -17,5 +17,5 @@ public interface JrResourceService extends BaseService<JrResource> {
      * 保存文件
      * @return
      */
-    List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id);
+    List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid);
 }

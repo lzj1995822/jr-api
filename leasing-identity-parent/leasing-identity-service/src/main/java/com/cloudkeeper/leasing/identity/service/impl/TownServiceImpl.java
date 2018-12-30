@@ -30,7 +30,8 @@ public class TownServiceImpl extends BaseServiceImpl<Town> implements TownServic
     public ExampleMatcher defaultExampleMatcher() {
         return super.defaultExampleMatcher()
                 .withMatcher("des", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("cityid", ExampleMatcher.GenericPropertyMatchers.contains());
     }
 
 }

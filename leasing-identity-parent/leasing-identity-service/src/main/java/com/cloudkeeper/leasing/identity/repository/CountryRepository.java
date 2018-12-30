@@ -6,12 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import java.util.Optional;
+
 /**
  * 村 repository
  * @author wj
  */
 @Repository
 public interface CountryRepository extends BaseRepository<Country> {
+   Optional<Country> findById(String id);
 
     List<Country> findAllBy();
 }

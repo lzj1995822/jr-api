@@ -36,9 +36,11 @@ public class JrResourceVO extends BaseVO {
     /** 地址 */
     @ApiModelProperty(value = "地址", position = 3, required = true)
     private String url;
-
     /** 表名 */
-    @ApiModelProperty(value = "表名", position = 3, required = true)
+    @ApiModelProperty(value = "表名", position = 4, required = true)
     private String type;
+    /** 缩略图*/
+    @ApiModelProperty(value = "缩略图", position = 5, required = true)
+    private String thumbnail;
 
 }

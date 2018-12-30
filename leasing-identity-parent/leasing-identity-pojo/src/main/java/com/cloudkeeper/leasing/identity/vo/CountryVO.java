@@ -36,5 +36,9 @@ public class CountryVO extends BaseVO {
     /** 积分 */
     @ApiModelProperty(value = "积分", position = 14)
     private Double score;
+    /** 镇id */
+    @ApiModelProperty(value = "镇id", position = 16)
+    private String townid;
+
 
 }

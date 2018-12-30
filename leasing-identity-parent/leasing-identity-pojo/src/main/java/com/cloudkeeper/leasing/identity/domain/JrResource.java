@@ -37,7 +37,11 @@ public class JrResource extends BaseEntity {
     @Column(length = 36)
     private String url;
     /** 表名*/
-    @ApiModelProperty(value = "表名", position = 3, required = true)
-    @Column(length = 36)
+    @ApiModelProperty(value = "表名", position = 4, required = true)
+    @Column(length = 256)
     private String type;
+    /** 缩略图*/
+    @ApiModelProperty(value = "缩略图", position = 5, required = true)
+    @Column(length = 256)
+    private String thumbnail;
 }

@@ -4,11 +4,14 @@ import com.cloudkeeper.leasing.identity.domain.City;
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * 市 repository
  * @author wj
  */
 @Repository
 public interface CityRepository extends BaseRepository<City> {
+    Optional<City> findById(String id);
 
 }
