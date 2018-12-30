@@ -57,8 +57,5 @@ public class RecordVO extends BaseVO {
     @ApiModelProperty(value = "志愿者", position = 24)
     private String volunteers;
 
-    /** 志愿者 */
-    @ApiModelProperty(value = "志愿者", position = 20)
-    private String volunteers;
 
 }
