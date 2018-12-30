@@ -59,7 +59,6 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         QActivity qActivity = QActivity.activity;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         String orgId = principal.getOrgId();
-        String type = null;
         if (principal.getType().equals(ProcessConstants.ORG_CENTER) || (principal.getType().equals( ProcessConstants.ORG_ROOM))){
             OrgCenter orgCenter = orgCenterService.findById(orgId);
             booleanBuilder.and(qActivity.activityType.eq(orgCenter.getType()));

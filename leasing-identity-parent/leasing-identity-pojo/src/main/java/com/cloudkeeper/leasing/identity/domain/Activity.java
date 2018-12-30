@@ -59,11 +59,7 @@ public class Activity extends BaseEntity {
     /** 结束时间 */
     @ApiModelProperty(value = "结束时间", position = 24)
     private LocalDateTime endAt;
-
-    /** 是否为特色活动 */
-    @ApiModelProperty(value = "是否为特色活动", position = 26)
-    private String isSpecial;
-
+    
     /** 活动类型 */
     @ApiModelProperty(value = "活动类型", position = 28)
     private String activityType;
