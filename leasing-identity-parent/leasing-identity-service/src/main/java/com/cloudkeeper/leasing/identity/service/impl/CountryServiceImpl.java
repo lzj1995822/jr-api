@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 村 service
  * @author wj
@@ -33,4 +35,8 @@ public class CountryServiceImpl extends BaseServiceImpl<Country> implements Coun
                 .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains());
     }
 
+    @Override
+    public List<Country> findAllByTownId(String townId) {
+        return countryRepository.findAllByTownId();
+    }
 }
