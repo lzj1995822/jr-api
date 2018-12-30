@@ -2,12 +2,15 @@ package com.cloudkeeper.leasing.identity.dto.principal;
 
 import com.cloudkeeper.leasing.base.constant.RegConstants;
 import com.cloudkeeper.leasing.base.dto.BaseEditDTO;
+import com.cloudkeeper.leasing.identity.domain.Role;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -59,4 +62,13 @@ public class PrincipalAddDTO extends BaseEditDTO {
     /** 角色id */
     @ApiModelProperty(value = "角色id", position = 24)
     private String roleId;
+
+
+    /** 组织id */
+    @ApiModelProperty(value = "组织id", position = 26)
+    private String orgId;
+
+    /** 组织类型 */
+    @ApiModelProperty(value = "组织类型", position = 28)
+    private String type;
 }

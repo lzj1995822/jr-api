@@ -49,4 +49,8 @@ public class OrgRoomVO extends BaseVO {
     @ApiModelProperty(value = "纬度", position = 20)
     private String locateY;
 
+    /** 描述 */
+    @ApiModelProperty(value = "描述", position = 22)
+    private String des;
+
 }

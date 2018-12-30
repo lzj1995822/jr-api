@@ -1,6 +1,6 @@
-package com.cloudkeeper.leasing.identity.domain;
+package com.cloudkeeper.leasing.identity.vo;
 
-import com.cloudkeeper.leasing.base.domain.BaseEntity;
+import com.cloudkeeper.leasing.base.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -9,23 +9,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
- * 活动记录
+ * 活动记录历史 VO
  * @author wj
  */
-@ApiModel(value = "活动记录", description = "活动记录")
+@ApiModel(value = "活动记录历史 VO", description = "活动记录历史 VO")
 @Getter
 @Setter
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "jr_record")
-public class Record extends BaseEntity {
+public class RecordHistoryVO extends BaseVO {
 
     /** 活动id */
     @ApiModelProperty(value = "活动id", position = 10)
@@ -43,12 +41,12 @@ public class Record extends BaseEntity {
     @ApiModelProperty(value = "活动内容", position = 16)
     private String content;
 
-    /** 是否为特色活动 */
-    @ApiModelProperty(value = "是否为特色活动", position = 18)
-    private Integer isSpecial;
-
     /** 积分 */
-    @ApiModelProperty(value = "积分", position = 20)
+    @ApiModelProperty(value = "积分", position = 18)
     private Double score;
+
+    /** 意见 */
+    @ApiModelProperty(value = "意见", position = 20)
+    private String opinion;
 
 }
