@@ -1,6 +1,7 @@
 package com.cloudkeeper.leasing.identity.vo;
 
 import com.cloudkeeper.leasing.base.vo.BaseVO;
+import com.cloudkeeper.leasing.identity.domain.JrResource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 村 VO
@@ -39,6 +41,8 @@ public class CountryVO extends BaseVO {
     /** 镇id */
     @ApiModelProperty(value = "镇id", position = 16)
     private String townid;
-
+    /** 村图片集合 */
+    @ApiModelProperty(value = "村图片集合", position = 18)
+    private List<JrResource> jrResourceList;
 
 }
