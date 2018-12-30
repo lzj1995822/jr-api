@@ -25,9 +25,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class JrResourceSearchable extends BaseSearchable {
 
-    /** 名称 */
-    @ApiModelProperty(value = "名称", position = 10, required = true)
-    private String name;
 
     /** 链接id */
     @ApiModelProperty(value = "链接id", position = 2, required = true)
@@ -38,7 +35,10 @@ public class JrResourceSearchable extends BaseSearchable {
     private String url;
 
     /** 表名 */
-    @ApiModelProperty(value = "表名", position = 3, required = true)
+    @ApiModelProperty(value = "表名", position = 4, required = true)
     private String type;
+    /** 缩略图*/
+    @ApiModelProperty(value = "缩略图", position = 5, required = true)
+    private String thumbnail;
 
 }

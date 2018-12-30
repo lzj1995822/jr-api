@@ -34,8 +34,8 @@ public class JrResourceControllerImpl extends BaseControllerImpl<JrResource, JrR
     }
 
     @Override
-    public List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id) {
+    public List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid) {
 
-        return jrResourceService.saveFile(multipartFile, type, id);
+        return jrResourceService.saveFile(multipartFile, type, id,countryid);
     }
 }

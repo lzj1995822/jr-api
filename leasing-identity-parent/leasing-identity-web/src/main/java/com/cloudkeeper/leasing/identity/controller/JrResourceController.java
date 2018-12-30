@@ -21,5 +21,5 @@ import java.util.List;
 public interface JrResourceController extends BaseController<JrResourceDTO, JrResourceSearchable, JrResourceVO> {
 
     @PostMapping("/fileUpload")
-    List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id);
+    List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid);
 }
