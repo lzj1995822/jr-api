@@ -6,6 +6,8 @@ import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.annotation.Nonnull;
+
 /**
  * 活动 service
  * @author wj
@@ -17,4 +19,8 @@ public interface ActivityService extends BaseService<Activity> {
      * @return
      */
     Page<Activity> pageByTypeAndPermission(Pageable pageable, ActivitySearchable activitySearchable);
+
+    @Nonnull
+    @Override
+    Activity save(@Nonnull Activity entity);
 }

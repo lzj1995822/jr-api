@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Resource;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     private final CountryService countryService;
 
     private final PrincipalService principalService;
-
+    private final ActivityHistoryService activityHistoryService;
     @Override
     protected BaseRepository<Activity> getBaseRepository() {
         return activityRepository;
@@ -70,5 +71,25 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             booleanBuilder.or(qActivity.type.eq(ProcessConstants.ACT_TYPE_CENTER));
         }
         return super.findAll(booleanBuilder, pageable);
+    }
+
+    @Nonnull
+    @Override
+    public Activity save(@Nonnull Activity entity) {
+        Activity activity=super.save(entity);
+        ActivityHistory activityHistory=new ActivityHistory();
+        activityHistory.setActivityid(activity.getId());
+        activityHistory.setActivityType(activity.getActivityType());
+        activityHistory.setBeginAt(activity.getBeginAt());
+        activityHistory.setDes(activity.getDes());
+        activityHistory.setEndAt(activity.getEndAt());
+        activityHistory.setName(activity.getName());
+        activityHistory.setScore(activity.getScore());
+        activityHistory.setStatus(activity.getStatus());
+        activityHistory.setType(activity.getType());
+        activityHistory.setUrl(activity.getUrl());
+        activityHistory.setIsDelete(activity.getIsDelete());
+        activityHistoryService.save(activityHistory);
+        return activity;
     }
 }
