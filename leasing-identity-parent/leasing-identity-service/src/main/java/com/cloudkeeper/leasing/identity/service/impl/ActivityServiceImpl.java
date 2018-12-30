@@ -8,9 +8,8 @@ import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.*;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -85,20 +83,11 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     @Nonnull
     @Override
     public Activity save(@Nonnull Activity entity) {
-        Activity activity=super.save(entity);
-        ActivityHistory activityHistory=new ActivityHistory();
-        activityHistory.setActivityid(activity.getId());
-        activityHistory.setActivityType(activity.getActivityType());
-        activityHistory.setBeginAt(activity.getBeginAt());
-        activityHistory.setDes(activity.getDes());
-        activityHistory.setEndAt(activity.getEndAt());
-        activityHistory.setName(activity.getName());
-        activityHistory.setScore(activity.getScore());
-        activityHistory.setStatus(activity.getStatus());
-        activityHistory.setType(activity.getType());
-        activityHistory.setUrl(activity.getUrl());
-        activityHistory.setIsDelete(activity.getIsDelete());
+        entity = super.save(entity);
+        ActivityHistory activityHistory = new ActivityHistory();
+        BeanUtils.copyProperties(entity, activityHistory, "id");
+        activityHistory.setActivityid(entity.getId());
         activityHistoryService.save(activityHistory);
-        return activity;
+        return entity;
     }
 }
