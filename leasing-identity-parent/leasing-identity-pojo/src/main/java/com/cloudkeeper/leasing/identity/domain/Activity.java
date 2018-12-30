@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.jdo.annotations.Join;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 活动
@@ -54,14 +54,18 @@ public class Activity extends BaseEntity {
 
     /** 开始时间 */
     @ApiModelProperty(value = "开始时间", position = 22)
-    private LocalDateTime beginAt;
+    private Date beginAt;
 
     /** 结束时间 */
     @ApiModelProperty(value = "结束时间", position = 24)
-    private LocalDateTime endAt;
+    private Date endAt;
     
     /** 活动类型 */
     @ApiModelProperty(value = "活动类型", position = 28)
     private String activityType;
+
+    @OneToOne
+    @JoinColumn(name = "createdBy", updatable = false, insertable = false)
+    private Principal creator;
 
 }

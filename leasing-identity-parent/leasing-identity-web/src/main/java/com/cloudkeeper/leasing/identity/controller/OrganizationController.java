@@ -20,7 +20,6 @@ import java.util.Map;
  * 组织 controller
  * @author jerry
  */
-@Api(value = "组织", tags = "组织")
 @RequestMapping("/organization")
 public interface OrganizationController {
 

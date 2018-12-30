@@ -8,6 +8,8 @@ import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.*;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,7 +19,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 活动 service
@@ -60,14 +64,19 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         QActivity qActivity = QActivity.activity;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         String orgId = principal.getOrgId();
-        if (principal.getType().equals(ProcessConstants.ORG_CENTER) || (principal.getType().equals( ProcessConstants.ORG_ROOM))){
+        if (principal.getType().equals(ProcessConstants.ORG_CENTER)){
             OrgCenter orgCenter = orgCenterService.findById(orgId);
             booleanBuilder.and(qActivity.activityType.eq(orgCenter.getType()));
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
+        } else if (principal.getType().equals( ProcessConstants.ORG_ROOM)) {
+            OrgRoom orgRoom = orgRoomService.findById(orgId);
+            List<Country> allByTownId = countryService.findAllByTownId(orgRoom.getTownId());
+            booleanBuilder.and(qActivity.activityType.eq(orgRoom.getType()))
+                    .and(qActivity.creator.type.eq(ProcessConstants.ORG_CENTER)
+                            .or(qActivity.creator.id.in(allByTownId.stream().map(Country::getId).collect(Collectors.toList()))));
         } else if  (principal.getType().equals( ProcessConstants.ORG_COUNTRY)){
-            Country country = countryService.findById(orgId);
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
-            booleanBuilder.and(qActivity.createdBy.eq(country.getId()));
+            booleanBuilder.and(qActivity.createdBy.eq(principal.getId()));
             booleanBuilder.or(qActivity.type.eq(ProcessConstants.ACT_TYPE_CENTER));
         }
         return super.findAll(booleanBuilder, pageable);
