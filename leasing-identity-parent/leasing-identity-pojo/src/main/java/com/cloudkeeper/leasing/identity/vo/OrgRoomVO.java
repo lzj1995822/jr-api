@@ -1,6 +1,8 @@
 package com.cloudkeeper.leasing.identity.vo;
 
 import com.cloudkeeper.leasing.base.vo.BaseVO;
+import com.cloudkeeper.leasing.identity.domain.JrResource;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -9,9 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 功能室 VO
@@ -52,5 +52,9 @@ public class OrgRoomVO extends BaseVO {
     /** 描述 */
     @ApiModelProperty(value = "描述", position = 22)
     private String des;
+    
+    /** 功能室图片集合 */
+    @ApiModelProperty(value = "功能室图片集合", position = 24)
+    private List<JrResource> jrResourceList;
 
 }
