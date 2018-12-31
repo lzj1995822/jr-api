@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RecordRepository extends BaseRepository<Record> {
-
+	
 }

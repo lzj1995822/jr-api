@@ -17,10 +17,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
@@ -48,9 +48,9 @@ public class PrincipalControllerImpl implements PrincipalController {
     private final OrganizationService organizationService;
 
     @Override
-    public Result<PrincipalVO> findOne(@ApiParam(value = "用户id", required = true) @PathVariable String id) {
+    public Result<Principal> findOne(@ApiParam(value = "用户id", required = true) @PathVariable String id) {
         Optional<Principal> principalOptional = principalService.findOptionalById(id);
-        return principalOptional.map(principal -> Result.of(principal.convert(PrincipalVO.class))).orElseGet(Result::ofNotFound);
+        return principalOptional.map(principal -> Result.of(principal)).orElseGet(Result::ofNotFound);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class PrincipalControllerImpl implements PrincipalController {
     public Result<Page<PrincipalVO>> page(@ApiParam(value = "用户查询条件", required = true) @RequestBody PrincipalSearchable principalSearchable,
                                           @ApiParam(value = "分页参数", required = true) Pageable pageable) {
         Page<Principal> principalPage = principalService.findAll(principalSearchable, pageable);
-        Page<PrincipalVO> principalVOPage = Principal.convert(principalPage, PrincipalVO.class);
+        Page<PrincipalVO> principalVOPage =  new PageImpl<>(principalService.toVoList(principalPage.getContent()), pageable, principalPage.getTotalElements());
         return Result.of(principalVOPage);
     }
 

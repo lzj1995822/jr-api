@@ -52,4 +52,22 @@ public class PrincipalVO extends BaseVO {
     /** 菜单列表*/
     @ApiModelProperty(value = "菜单列表", position = 26)
     private List<String> menuCodeList;
+
+    @ApiModelProperty(value = "组织名", position = 28)
+    private String orgName;
+
+    @ApiModelProperty(value = "角色名", position = 30)
+    private String roleName;
+
+    /** 组织id */
+    @ApiModelProperty(value = "组织id", position = 26)
+    private String orgId;
+
+    /** 角色id */
+    @ApiModelProperty(value = "角色id", position = 24)
+    private String roleId;
+
+    /** 组织类型 */
+    @ApiModelProperty(value = "组织类型", position = 28)
+    private String type;
 }
