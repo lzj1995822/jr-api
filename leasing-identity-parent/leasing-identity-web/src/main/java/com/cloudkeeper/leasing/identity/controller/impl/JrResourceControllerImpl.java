@@ -11,6 +11,7 @@ import com.cloudkeeper.leasing.identity.service.JrResourceService;
 import com.cloudkeeper.leasing.identity.vo.JrResourceVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,5 +38,11 @@ public class JrResourceControllerImpl extends BaseControllerImpl<JrResource, JrR
     public List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid) {
 
         return jrResourceService.saveFile(multipartFile, type, id,countryid);
+    }
+
+    @PostMapping("/deleteList")
+    public Result<String> deleteList(List<String> ids) {
+        jrResourceService.deleteMore(ids);
+        return Result.of("删除成功");
     }
 }

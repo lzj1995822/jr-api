@@ -21,4 +21,9 @@ public interface JrResourceService extends BaseService<JrResource> {
     List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid);
     List<JrResource> findByConnectId(String connectid);
 
+    /**
+     * 批量删除
+     * @param ids
+     */
+    void deleteMore(List<String> ids);
 }

@@ -59,7 +59,7 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
         String nian=null;
         List<JrResource> jrResourceList=new ArrayList<>();
         if("record".equals(type)){
-            file=new File("F://JURONG//record");
+            file=new File("D://JURONG//record");
             if (file.exists() == false) {
                 file.mkdir();
             }
@@ -93,11 +93,11 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
                 file.mkdir();
             }
         }else {
-            file = new File(String.format("F://JURONG//%s", type));
+            file = new File(String.format("D://JURONG//%s", type));
             if (file.exists() == false) {
                 file.mkdir();
             }
-            file = new File("F://JURONG" + "//" + type + "//" + id);
+            file = new File("D://JURONG" + "//" + type + "//" + id);
             if (file.exists() == false) {
                 file.mkdir();
             }
@@ -150,6 +150,11 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
     }
     public List<JrResource> findByConnectId(String connectid){
         return jrResourceRepository.findByConnectId(connectid);
+    }
+
+    @Override
+    public void deleteMore(List<String> ids) {
+        ids.stream().forEach(item -> jrResourceRepository.deleteById(item));
     }
 
 }

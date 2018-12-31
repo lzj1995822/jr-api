@@ -37,4 +37,9 @@ public class NoticeVO extends BaseVO {
     @ApiModelProperty(value = "附件url", position = 14)
     private String url;
 
+    /** 发布单位 */
+    @ApiModelProperty(value = "发布单位", position = 14)
+    private String creator;
+
+
 }

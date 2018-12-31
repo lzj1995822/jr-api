@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 通知
@@ -39,4 +37,11 @@ public class Notice extends BaseEntity {
     @ApiModelProperty(value = "附件url", position = 14)
     private String url;
 
+    /** 文化类型 */
+    @ApiModelProperty(value = "文化类型", position = 16)
+    private String type;
+
+    @OneToOne
+    @JoinColumn(name = "createdBy", insertable = false, updatable = false)
+    private Principal creator;
 }

@@ -6,6 +6,7 @@ public class ProcessConstants {
     public static final String ACTIVITY_COMMITED = "ACTIVITY_COMMITED";	//活动提交
     public static final String ACTIVITY_TOWN_PASSED = "ACTIVITY_TOWN_PASSED";	//活动镇通过
     public static final String ACTIVITY_CITY_PASSED = "ACTIVITY_CITY_PASSED";	//活动市通过
+    public static final String ACTIVITY_REJECTED = "ACTIVITY_REJECTED";	//驳回
 
     /** record流程*/
     public static final String RECORD_COMMITED = "RECORD_COMMITED"; //记录提交

@@ -37,4 +37,8 @@ public class NoticeDTO extends BaseEditDTO {
     @ApiModelProperty(value = "附件url", position = 14)
     private String url;
 
+    /** 文化类型 */
+    @ApiModelProperty(value = "文化类型", position = 16)
+    private String type;
+
 }
