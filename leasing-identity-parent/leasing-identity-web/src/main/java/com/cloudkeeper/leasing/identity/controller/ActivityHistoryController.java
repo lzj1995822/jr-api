@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 活动记录 controller
  * @author hf
  */
-@Api(value = "活动记录", tags = "活动记录")
+@Api(value = "活动历史", tags = "活动历史")
 @RequestMapping("/activityHistory")
 public interface ActivityHistoryController extends BaseController<ActivityHistoryDTO, ActivityHistorySearchable, ActivityHistoryVO> {
 
