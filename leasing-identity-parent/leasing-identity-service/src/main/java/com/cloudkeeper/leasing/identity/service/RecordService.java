@@ -14,12 +14,21 @@ import java.util.List;
  */
 public interface RecordService extends BaseService<Record> {
     List<CountRecordVO> countRecordVOList(String codeNumber,String activityid);
+    List<CountRecordVO> countRecordScoreVOList(String codeNumber,String activityid);
     List<CountRecordVO> countRecordBytown(String townid,String activityid);
+    List<CountRecordVO> countRecordScoreBytown(String townid,String activityid);
    List<CountTimeVO> countRecordByYearorgCenter();
+   List<CountTimeVO> countRecordScoreByYearorgCenter();
     List<CountTimeVO> countRecordByMonthorgCenter(String Year);
+    List<CountTimeVO> countRecordScoreByMonthorgCenter(String Year);
     List<CountTimeVO> countRecordByYearTown();
+    List<CountTimeVO> countRecordScoreByYearTown();
     List<CountTimeVO> countRecordByMonthTown(String Year);
+    List<CountTimeVO> countRecordScoreByMonthTown(String Year);
     List<CountTimeVO> countRecordByMonthCountry(String Year);
+    List<CountTimeVO> countRecordScoreByMonthCountry(String Year);
     List<CountTimeVO> countRecordByYearCountry();
+    List<CountTimeVO> countRecordScoreByYearCountry();
     List<CountRateVO> CountRateVO();
+    List<CountRateVO> CountScoreRateVO();
 }

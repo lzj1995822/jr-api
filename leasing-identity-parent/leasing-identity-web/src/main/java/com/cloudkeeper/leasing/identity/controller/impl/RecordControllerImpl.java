@@ -36,28 +36,72 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
     public List<CountRecordVO> countRecordVOList(String codeNumber,String activityid){
         return recordService.countRecordVOList(codeNumber, activityid);
     }
+    
+    public List<CountRecordVO> countRecordScoreVOList(String codeNumber,String activityid){
+        return recordService.countRecordScoreVOList(codeNumber, activityid);
+    }
+    
     public List<CountRecordVO> countRecordBytown(String townid,String activityid){
         return recordService.countRecordBytown(townid, activityid);
     }
+    
+    public List<CountRecordVO> countRecordScoreBytown(String townid,String activityid){
+    	return recordService.countRecordScoreBytown(townid, activityid);
+    }
+    
     public List<CountTimeVO> countRecordByYearorgCenter(){
         return recordService.countRecordByYearorgCenter();
     }
+    
+    public List<CountTimeVO> countRecordScoreByYearorgCenter(){
+        return recordService.countRecordScoreByYearorgCenter();
+    }
+    
     public List<CountTimeVO> countRecordByMonthorgCenter(String Year){
         return recordService.countRecordByMonthorgCenter(Year);
     }
+    
+    public List<CountTimeVO> countRecordScoreByMonthorgCenter(String Year){
+        return recordService.countRecordScoreByMonthorgCenter(Year);
+    }
+    
     public List<CountTimeVO> countRecordByYearTown(){
         return recordService.countRecordByYearTown();
     }
+    
+    public List<CountTimeVO> countRecordScoreByYearTown(){
+        return recordService.countRecordScoreByYearTown();
+    }
+    
     public List<CountTimeVO> countRecordByMonthTown(String Year){
         return recordService.countRecordByMonthTown(Year);
     }
+    
+    public List<CountTimeVO> countRecordScoreByMonthTown(String Year){
+        return recordService.countRecordScoreByMonthTown(Year);
+    }
+    
     public List<CountTimeVO> countRecordByMonthCountry(String Year){
         return recordService.countRecordByMonthCountry(Year);
     }
+    
+    public List<CountTimeVO> countRecordScoreByMonthCountry(String Year){
+        return recordService.countRecordScoreByMonthCountry(Year);
+    }
+    
     public List<CountTimeVO> countRecordByYearCountry(){
         return recordService.countRecordByYearCountry();
     }
+    
+    public List<CountTimeVO> countRecordScoreByYearCountry(){
+        return recordService.countRecordScoreByYearCountry();
+    }
+    
     public  List<CountRateVO> CountRateVO(){
         return recordService.CountRateVO();
+    }
+    
+    public  List<CountRateVO> CountScoreRateVO(){
+        return recordService.CountScoreRateVO();
     }
 }

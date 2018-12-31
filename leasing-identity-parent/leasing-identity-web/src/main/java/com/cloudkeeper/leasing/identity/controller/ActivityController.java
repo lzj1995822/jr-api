@@ -25,6 +25,7 @@ public interface ActivityController extends BaseController<ActivityDTO, Activity
     /** 具体活动执行情况表*/
     @ApiModelProperty(value = "具体活动执行情况表", position = 10, required = true)
     @GetMapping("/countRecordlist")
-     RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) ;
-
+    RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) ;
+    
+    
 }

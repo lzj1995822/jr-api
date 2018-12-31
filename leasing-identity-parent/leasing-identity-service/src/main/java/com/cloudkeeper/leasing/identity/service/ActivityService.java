@@ -26,5 +26,5 @@ public interface ActivityService extends BaseService<Activity> {
     @Nonnull
     @Override
     Activity save(@Nonnull Activity entity);
-     RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) ;
+    RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) ;
 }
