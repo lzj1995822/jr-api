@@ -1,5 +1,6 @@
 package com.cloudkeeper.leasing.identity.controller;
 
+import com.cloudkeeper.leasing.identity.domain.Principal;
 import com.cloudkeeper.leasing.identity.dto.principal.PrincipalAddDTO;
 import com.cloudkeeper.leasing.identity.dto.principal.PrincipalEditDTO;
 import com.cloudkeeper.leasing.identity.dto.principal.PrincipalLoginDTO;
@@ -30,14 +31,14 @@ public interface PrincipalController {
 
     @ApiOperation(value = "查询用户", notes = "查询用户", position = 1)
     @GetMapping("/{id}id")
-    Result<PrincipalVO> findOne(@ApiParam(value = "用户id", required = true) @PathVariable String id);
+    Result<Principal> findOne(@ApiParam(value = "用户id", required = true) @PathVariable String id);
 
     @ApiOperation(value = "新增", notes = "新增", position = 2)
     @PostMapping("/")
     Result<PrincipalVO> add(@ApiParam(value = "用户dto", required = true) @RequestBody @Validated PrincipalAddDTO principalAddDTO);
 
     @ApiOperation(value = "更新", notes = "更新", position = 3)
-    @PutMapping("/{id}id")
+    @PutMapping("/{id}")
     Result<PrincipalVO> update(@ApiParam(value = "用户id", required = true) @PathVariable String id,
                                @ApiParam(value = "用户dto", required = true) @RequestBody @Validated PrincipalEditDTO principalEditDTO);
 

@@ -94,6 +94,7 @@ public class PrincipalServiceImpl extends BaseServiceImpl<Principal> implements 
             return Result.of(Result.ResultCode.LOGIN_FAIL.getCode(), "用户名已被禁用！");
         }
         String token = redisService.putToken(principal.getId());
+        token += "," + principal.getId();
         return Result.of("登录成功！", token);
     }
 
@@ -197,12 +198,14 @@ public class PrincipalServiceImpl extends BaseServiceImpl<Principal> implements 
             PrincipalVO principalVO = new PrincipalVO();
             BeanUtils.copyProperties(principal, principalVO);
             principalVO.setRoleName(roleService.findById(principal.getRoleId()).getName());
-            if (principal.getType().equals(ProcessConstants.ORG_CENTER)) {
+            if (ProcessConstants.ORG_CENTER.equals(principal.getType())) {
                 principalVO.setOrgName(orgCenterService.findById(principal.getOrgId()).getName());
             } else if (ProcessConstants.ORG_ROOM.equals(principal.getType())){
                 principalVO.setOrgName(orgRoomService.findById(principal.getOrgId()).getName());
             } else if (ProcessConstants.ORG_COUNTRY.equals(principal.getType())){
                 principalVO.setOrgName(countryService.findById(principal.getOrgId()).getName());
+            } else {
+                principalVO.setOrgName("");
             }
             principalVOS.add(principalVO);
         });
