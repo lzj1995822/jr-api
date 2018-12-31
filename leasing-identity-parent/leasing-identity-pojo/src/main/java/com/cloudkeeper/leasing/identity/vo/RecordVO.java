@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RecordVO extends BaseVO {
 
-    /** 活动id */
+	 /** 活动id */
     @ApiModelProperty(value = "活动id", position = 10)
     private String activityId;
 
@@ -41,12 +41,21 @@ public class RecordVO extends BaseVO {
     @ApiModelProperty(value = "活动内容", position = 16)
     private String content;
 
-    /** 积分 */
-    @ApiModelProperty(value = "积分", position = 18)
-    private Double score;
+    /** 是否为特色活动 */
+    @ApiModelProperty(value = "是否为特色活动", position = 18)
+    private Integer isSpecial;
 
+    /** 积分 */
+    @ApiModelProperty(value = "积分", position = 20)
+    private Double score;
+    
+    /** 意见 */
+    @ApiModelProperty(value = "意见", position = 22)
+    private String opinion;
+    
     /** 志愿者 */
-    @ApiModelProperty(value = "志愿者", position = 20)
+    @ApiModelProperty(value = "志愿者", position = 24)
     private String volunteers;
+
 
 }

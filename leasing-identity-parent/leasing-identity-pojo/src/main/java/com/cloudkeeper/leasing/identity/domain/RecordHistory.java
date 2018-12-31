@@ -50,5 +50,17 @@ public class RecordHistory extends BaseEntity {
     /** 意见 */
     @ApiModelProperty(value = "意见", position = 20)
     private String opinion;
+    
+    /** 记录id */
+    @ApiModelProperty(value = "记录id", position = 22)
+    private String recordId;
+    
+    /** 是否特殊 */
+    @ApiModelProperty(value = "是否特殊", position = 24)
+    private Integer isSpecial;
+    
+    /** 志愿者 */
+    @ApiModelProperty(value = "志愿者", position = 26)
+    private String volunteers;
 
 }

@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 文件上传 service
@@ -18,4 +19,6 @@ public interface JrResourceService extends BaseService<JrResource> {
      * @return
      */
     List<JrResource> saveFile(MultipartFile[] multipartFile, String type, String id,String countryid);
+    List<JrResource> findByConnectId(String connectid);
+
 }

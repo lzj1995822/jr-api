@@ -40,4 +40,5 @@ public class CountryServiceImpl extends BaseServiceImpl<Country> implements Coun
     public List<Country> findAllByTownId(String townId) {
         return countryRepository.findAllByTownid(townId);
     }
+
 }

@@ -50,8 +50,13 @@ public class Record extends BaseEntity {
     /** 积分 */
     @ApiModelProperty(value = "积分", position = 20)
     private Double score;
+    
+    /** 意见 */
+    @ApiModelProperty(value = "意见", position = 22)
+    private String opinion;
+    
 
     /** 志愿者 */
-    @ApiModelProperty(value = "志愿者", position = 22)
+    @ApiModelProperty(value = "志愿者", position = 24)
     private String volunteers;
 }

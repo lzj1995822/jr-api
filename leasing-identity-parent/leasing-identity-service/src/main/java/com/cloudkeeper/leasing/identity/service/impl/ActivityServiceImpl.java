@@ -8,16 +8,15 @@ import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.*;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +39,7 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     private final CountryService countryService;
 
     private final PrincipalService principalService;
-
+    private final ActivityHistoryService activityHistoryService;
     @Override
     protected BaseRepository<Activity> getBaseRepository() {
         return activityRepository;
@@ -80,5 +79,16 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             booleanBuilder.or(qActivity.type.eq(ProcessConstants.ACT_TYPE_CENTER));
         }
         return super.findAll(booleanBuilder, pageable);
+    }
+
+    @Nonnull
+    @Override
+    public Activity save(@Nonnull Activity entity) {
+        entity = super.save(entity);
+        ActivityHistory activityHistory = new ActivityHistory();
+        BeanUtils.copyProperties(entity, activityHistory, "id");
+        activityHistory.setActivityid(entity.getId());
+        activityHistoryService.save(activityHistory);
+        return entity;
     }
 }

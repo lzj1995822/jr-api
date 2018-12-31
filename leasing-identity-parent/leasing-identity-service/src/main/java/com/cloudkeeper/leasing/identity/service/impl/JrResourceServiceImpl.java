@@ -148,4 +148,8 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
 
         return  jrResourceList;
     }
+    public List<JrResource> findByConnectId(String connectid){
+        return jrResourceRepository.findByConnectId(connectid);
+    }
+
 }
