@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 /**
  * 角色 controller
  * @author jerry
@@ -38,4 +40,12 @@ public class RoleControllerImpl extends BaseControllerImpl<Role, RoleDTO, RoleSe
         return Result.of(exists);
     }
 
+    @Override
+    public Result<Role> findOneEntity(@PathVariable String id) {
+        Optional<Role> optional = roleService.findOptionalById(id);
+        if (!optional.isPresent()) {
+            return Result.ofNotFound();
+        }
+        return Result.of(optional.get());
+    }
 }

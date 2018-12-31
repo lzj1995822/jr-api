@@ -2,6 +2,7 @@ package com.cloudkeeper.leasing.identity.controller;
 
 import com.cloudkeeper.leasing.base.controller.BaseController;
 import com.cloudkeeper.leasing.base.model.Result;
+import com.cloudkeeper.leasing.identity.domain.Role;
 import com.cloudkeeper.leasing.identity.dto.role.RoleDTO;
 import com.cloudkeeper.leasing.identity.dto.role.RoleSearchable;
 import com.cloudkeeper.leasing.identity.vo.RoleVO;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 角色 controller
  * @author jerry
  */
-@Api(value = "角色", tags = "角色")
+@Api(value = "角色1", tags = "角色1")
 @RequestMapping("/role")
 public interface RoleController extends BaseController<RoleDTO, RoleSearchable, RoleVO> {
 
@@ -25,4 +26,7 @@ public interface RoleController extends BaseController<RoleDTO, RoleSearchable, 
     Result<Boolean> existsCode(@ApiParam(value = "编码", required = true) @PathVariable String code,
                                @ApiParam(value = "角色id") @PathVariable(required = false) String id);
 
+    @ApiOperation(value = "获取实体", notes = "获取实体")
+    @GetMapping("/domain/{id}")
+    Result<Role> findOneEntity(@ApiParam(value = "角色id") @PathVariable(name = "id") String id);
 }
