@@ -3,9 +3,6 @@ server:
 spring:
   application:
     name: eureka-server
-  mvc:
-    async:
-      request-timeout: 10000
 eureka:
   instance:
     hostname: localhost

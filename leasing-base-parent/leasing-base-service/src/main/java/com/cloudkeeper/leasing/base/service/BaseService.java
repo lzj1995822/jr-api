@@ -9,7 +9,6 @@ import com.querydsl.core.types.Predicate;
 import org.hibernate.query.NativeQuery;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.lang.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -256,6 +255,10 @@ public interface BaseService<T extends BaseEntity> {
      * @return
      */
     <R> List<R> getLatestHisListByHisId(@Nonnull Class<R> clazz, @Nonnull List<String> hisIdList);
+
+    <R> R findOneBySql(@Nonnull Class<R> clazz, @Nonnull String sql);
+
+    <R> List<R> findAllListBySql(@Nonnull Class<R> clazz, @Nonnull String sql);
 
     /**
      * 删除某一业务类记录所有历史记录

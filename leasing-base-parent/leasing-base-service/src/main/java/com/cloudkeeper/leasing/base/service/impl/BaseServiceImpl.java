@@ -13,8 +13,6 @@ import com.querydsl.core.types.*;
 import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.extern.slf4j.Slf4j;
-import io.swagger.models.auth.In;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
@@ -22,7 +20,6 @@ import org.hibernate.type.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
@@ -460,4 +457,21 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     public Object getCurrentPrincipal() {
         return getBaseRepository().findById((String) request.getSession().getAttribute(AuthorizationConstants.CURRENT_USER_ID));
     }
+
+    @Override
+    public <R> R findOneBySql(@Nonnull Class<R> clazz, @Nonnull String sql) {
+        NativeQuery query = getQuery(clazz, sql);
+        R r = (R) query.uniqueResult();
+        return r;
+    }
+
+    @Override
+    public <R> List<R> findAllListBySql(@Nonnull Class<R> clazz, @Nonnull String sql) {
+        NativeQuery query = getQuery(clazz, sql);
+        List<R> list = query.getResultList();
+        return list;
+    }
+
+
+
 }

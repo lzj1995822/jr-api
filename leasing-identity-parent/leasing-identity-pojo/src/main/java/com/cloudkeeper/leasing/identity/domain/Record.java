@@ -1,6 +1,8 @@
 package com.cloudkeeper.leasing.identity.domain;
 
 import com.cloudkeeper.leasing.base.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -11,6 +13,9 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -59,4 +64,16 @@ public class Record extends BaseEntity {
     /** 志愿者 */
     @ApiModelProperty(value = "志愿者", position = 24)
     private String volunteers;
+    
+    @OneToOne
+    @JoinColumn(name = "createdBy", updatable = false, insertable = false)
+    private Principal creator;
+    
+    /** 活动 */
+    @ApiModelProperty(value = "活动", position = 26, required = true)
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "activityId", insertable = false, updatable = false)
+    private Activity activity;
+    
 }

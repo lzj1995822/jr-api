@@ -2,13 +2,19 @@ package com.cloudkeeper.leasing.identity.service.impl;
 
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import com.cloudkeeper.leasing.base.service.impl.BaseServiceImpl;
+import com.cloudkeeper.leasing.base.utils.BeanConverts;
+import com.cloudkeeper.leasing.base.utils.RestPageImpl;
 import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
 import com.cloudkeeper.leasing.identity.domain.*;
 import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.*;
+import com.cloudkeeper.leasing.identity.vo.CountActivity1Vo;
+import com.cloudkeeper.leasing.identity.vo.CountVO;
 import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.internal.NativeQueryImpl;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
@@ -18,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -90,5 +97,46 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         activityHistory.setActivityid(entity.getId());
         activityHistoryService.save(activityHistory);
         return entity;
+    }
+
+
+    public RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) {
+       String sql ="SELECT\n" +
+               "\tjt.`name` as townname,\n" +
+               "\tjc.`name` as countryname,\n" +
+               "\tjr.*, ja.`name` as activityname,\n" +
+               "\tja.des,\n" +
+               "\tja.url,\n" +
+               "\tja.score as ascore,\n" +
+               "\tja.type,\n" +
+               "\tja.`status` as astatus,\n" +
+               "\tja.activityType\n" +
+               "FROM\n" +
+               "\tjr_activity ja,\n" +
+               "\tjr_record jr,\n" +
+               "\tjr_country jc,\n" +
+               "\tjr_town jt\n" +
+               "WHERE\n" +
+               "\tja.id = jr.activityId\n" +
+               "AND jr.countryId = jc.id\n" +
+               "AND jc.townid = jt.id\n" +
+               "ORDER BY\n" +
+               "\tjc.townid\n"+"\tlimit\n"+pageable.getPageNumber()+","+pageable.getPageSize();
+
+        String sql1 ="SELECT\n"+
+                "\tcount(jr.id) as count "+
+                "FROM\n" +
+                "\tjr_activity ja,\n" +
+                "\tjr_record jr,\n" +
+                "\tjr_country jc,\n" +
+                "\tjr_town jt\n" +
+                "WHERE\n" +
+                "\tja.id = jr.activityId\n" +
+                "AND jr.countryId = jc.id\n" +
+                "AND jc.townid = jt.id\n" +
+                "ORDER BY\n" +
+                "\tjc.townid";
+        Long total=super.findOneBySql(CountVO.class, sql1).getCount();
+        return new RestPageImpl<>(super.findAllListBySql(CountActivity1Vo.class, sql), pageable,total);
     }
 }
