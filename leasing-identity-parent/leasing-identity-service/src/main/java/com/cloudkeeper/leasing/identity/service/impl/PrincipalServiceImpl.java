@@ -6,6 +6,7 @@ import com.cloudkeeper.leasing.base.model.Result;
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import com.cloudkeeper.leasing.base.service.RedisService;
 import com.cloudkeeper.leasing.base.service.impl.BaseServiceImpl;
+import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
 import com.cloudkeeper.leasing.identity.domain.Principal;
 import com.cloudkeeper.leasing.identity.domain.PrincipalOrganization;
 import com.cloudkeeper.leasing.identity.domain.QPrincipal;
@@ -13,10 +14,7 @@ import com.cloudkeeper.leasing.identity.domain.QPrincipalOrganization;
 import com.cloudkeeper.leasing.identity.dto.principal.PrincipalLoginDTO;
 import com.cloudkeeper.leasing.identity.dto.principal.PrincipalSearchable;
 import com.cloudkeeper.leasing.identity.repository.PrincipalRepository;
-import com.cloudkeeper.leasing.identity.service.OrganizationService;
-import com.cloudkeeper.leasing.identity.service.PrincipalOrganizationService;
-import com.cloudkeeper.leasing.identity.service.PrincipalService;
-import com.cloudkeeper.leasing.identity.service.RoleMenuService;
+import com.cloudkeeper.leasing.identity.service.*;
 import com.cloudkeeper.leasing.identity.vo.OrganizationVO;
 import com.cloudkeeper.leasing.identity.vo.PrincipalVO;
 import com.google.common.collect.Lists;
@@ -25,6 +23,7 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.JPAExpressions;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -33,6 +32,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,6 +56,14 @@ public class PrincipalServiceImpl extends BaseServiceImpl<Principal> implements 
 
     /** 角色组织 service */
     private final RoleMenuService roleMenuService;
+
+    private final OrgCenterService orgCenterService;
+
+    private final OrgRoomService orgRoomService;
+
+    private final CountryService countryService;
+
+    private final RoleService roleService;
 
     /** redis service */
     private final RedisService redisService;
@@ -175,5 +183,29 @@ public class PrincipalServiceImpl extends BaseServiceImpl<Principal> implements 
             principalOptional = this.findByOrganizationPosition(principalOrganization.getOrganization().getParentPositionId());
         }
         return principalOptional;
+    }
+
+    @Override
+    public List<Principal> findAllByOrgIdIn(List<String> orgIdList) {
+        return principalRepository.findAllByOrgIdIn(orgIdList);
+    }
+
+    @Override
+    public List<PrincipalVO> toVoList(List<Principal> principals) {
+        List<PrincipalVO> principalVOS = new ArrayList<>();
+        principals.stream().forEach(principal -> {
+            PrincipalVO principalVO = new PrincipalVO();
+            BeanUtils.copyProperties(principal, principalVO);
+            principalVO.setRoleName(roleService.findById(principal.getRoleId()).getName());
+            if (principal.getType().equals(ProcessConstants.ORG_CENTER)) {
+                principalVO.setOrgName(orgCenterService.findById(principal.getOrgId()).getName());
+            } else if (ProcessConstants.ORG_ROOM.equals(principal.getType())){
+                principalVO.setOrgName(orgRoomService.findById(principal.getOrgId()).getName());
+            } else if (ProcessConstants.ORG_COUNTRY.equals(principal.getType())){
+                principalVO.setOrgName(countryService.findById(principal.getOrgId()).getName());
+            }
+            principalVOS.add(principalVO);
+        });
+        return principalVOS;
     }
 }

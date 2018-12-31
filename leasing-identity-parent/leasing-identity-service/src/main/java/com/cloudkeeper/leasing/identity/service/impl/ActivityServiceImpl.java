@@ -70,9 +70,10 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
         } else if (principal.getType().equals( ProcessConstants.ORG_ROOM)) {
             OrgRoom orgRoom = orgRoomService.findById(orgId);
             List<Country> allByTownId = countryService.findAllByTownId(orgRoom.getTownId());
+            List<Principal> allByOrgIdIn = principalService.findAllByOrgIdIn(allByTownId.stream().map(Country::getId).collect(Collectors.toList()));
             booleanBuilder.and(qActivity.activityType.eq(orgRoom.getType()))
                     .and(qActivity.creator.type.eq(ProcessConstants.ORG_CENTER)
-                            .or(qActivity.creator.id.in(allByTownId.stream().map(Country::getId).collect(Collectors.toList()))));
+                            .or(qActivity.creator.id.in(allByOrgIdIn.stream().map(Principal::getId).collect(Collectors.toList()))));
         } else if  (principal.getType().equals( ProcessConstants.ORG_COUNTRY)){
             booleanBuilder.and(qActivity.status.eq(ProcessConstants.ACTIVITY_CITY_PASSED));
             booleanBuilder.and(qActivity.createdBy.eq(principal.getId()));

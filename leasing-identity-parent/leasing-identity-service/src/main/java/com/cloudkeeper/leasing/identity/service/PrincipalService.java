@@ -68,4 +68,7 @@ public interface PrincipalService extends BaseService<Principal> {
      */
     Optional<Principal> findLeaderById(@Nonnull String id);
 
+    List<Principal> findAllByOrgIdIn(List<String> orgIdList);
+
+    List<PrincipalVO> toVoList(List<Principal> principals);
 }

@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: zuul
+  mvc:
+    async:
+      request-timeout: 10000
 
 eureka:
   client:
