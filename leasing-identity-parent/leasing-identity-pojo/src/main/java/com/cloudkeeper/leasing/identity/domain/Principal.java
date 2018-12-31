@@ -8,7 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 
 /**
@@ -71,6 +74,24 @@ public class Principal extends BaseEntity {
     /** 组织id */
     @ApiModelProperty(value = "组织id", position = 26)
     private String orgId;
+
+    @ApiModelProperty(value = "分中心组织", position = 28)
+    @OneToOne
+    @NotFound(action=NotFoundAction.IGNORE)
+    @JoinColumn(name = "orgId", updatable = false, insertable = false)
+    private OrgCenter orgCenter;
+
+    @ApiModelProperty(value = "功能室组织", position = 28)
+    @OneToOne
+    @NotFound(action=NotFoundAction.IGNORE)
+    @JoinColumn(name = "orgId", updatable = false, insertable = false)
+    private OrgRoom orgRoom;
+
+    @ApiModelProperty(value = "村组织", position = 28)
+    @OneToOne
+    @NotFound(action= NotFoundAction.IGNORE)
+    @JoinColumn(name = "orgId", updatable = false, insertable = false)
+    private Country country;
 
     /** 组织类型 */
     @ApiModelProperty(value = "组织类型", position = 28)

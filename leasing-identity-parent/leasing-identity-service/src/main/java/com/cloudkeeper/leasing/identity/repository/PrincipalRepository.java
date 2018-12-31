@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -44,4 +45,6 @@ public interface PrincipalRepository extends BaseRepository<Principal> {
 //    @Query(value = "INSERT INTO ck_id_principal_hi select * from ck_id_principal where id = ?1", nativeQuery = true)
 //    @Transactional
 //    int insertHis(String id);
+
+    List<Principal> findAllByOrgIdIn(List<String> orgIdList);
 }

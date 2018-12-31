@@ -59,7 +59,7 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
         String nian=null;
         List<JrResource> jrResourceList=new ArrayList<>();
         if("record".equals(type)){
-            file=new File("D://JURONG//record");
+            file=new File("F://JURONG//record");
             if (file.exists() == false) {
                 file.mkdir();
             }
@@ -93,11 +93,11 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
                 file.mkdir();
             }
         }else {
-            file = new File(String.format("D://JURONG//%s", type));
+            file = new File(String.format("F://JURONG//%s", type));
             if (file.exists() == false) {
                 file.mkdir();
             }
-            file = new File("D://JURONG" + "//" + type + "//" + id);
+            file = new File("F://JURONG" + "//" + type + "//" + id);
             if (file.exists() == false) {
                 file.mkdir();
             }
