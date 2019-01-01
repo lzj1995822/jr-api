@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -374,9 +375,7 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
                 "jr_activity ja\n";
 
         List<CountRateVO> countRateVOList=super.findAllListBySql(CountRateVO.class,sql);
-        Long total=super.findOneBySql(CountVO.class, sql1).getCount();
-        System.out.println(total);
-        System.out.println(countRateVOList);
+        Long total=super.findOneBySql(CountVO.class, sql1).getCount();;
         for (CountRateVO countRateVO1:countRateVOList){
             countRateVO1.setRate(countRateVO1.getRate()/total);
         }
@@ -400,12 +399,21 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
 
         List<CountRateVO> countRateVOList=super.findAllListBySql(CountRateVO.class,sql);
         Long total=super.findOneBySql(CountVO.class, sql1).getCount();
-        System.out.println(total);
-        System.out.println(countRateVOList);
         for (CountRateVO countRateVO1:countRateVOList){
             countRateVO1.setRate(countRateVO1.getRate()/total);
         }
         return countRateVOList;
 
+    }
+    public List<Record> addAllReord(String countryId,String [] artivityId){
+        List<Record> recordList=new ArrayList<>();
+
+        for (String s:artivityId){
+            Record record=new Record();
+            record.setCountryId(countryId);
+            record.setActivityId(s);
+            recordList.add(record);
+        }
+        return super.saveList(recordList);
     }
 }
