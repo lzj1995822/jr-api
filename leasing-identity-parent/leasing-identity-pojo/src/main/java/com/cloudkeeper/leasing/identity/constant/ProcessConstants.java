@@ -24,6 +24,8 @@ public class ProcessConstants {
     public static final String ORG_CENTER = "ORG_CENTER"; //分中心
     public static final String ORG_ROOM = "ORG_ROOM";	//功能室
     public static final String ORG_COUNTRY = "ORG_COUNTRY";	//村
+    public static final String ORG_CITY = "ORG_CITY"; //中心（市级）
+    public static final String ORG_TOWN = "ORG_TOWN";	//镇
 
     /** 活动类型（是自选计划还是分中心发布的计划）*/
     public static final String ACT_TYPE_SELF = "ACT_TYPE_SELF";	//自选计划
