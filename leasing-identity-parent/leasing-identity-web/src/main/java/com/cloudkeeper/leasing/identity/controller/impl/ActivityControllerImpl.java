@@ -51,4 +51,7 @@ public class ActivityControllerImpl extends BaseControllerImpl<Activity, Activit
     public RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) {
         return activityService.countRecordlist(pageable);
     }
+    public List<ActivityVO>  findActivityByTownid(String townid){
+        return activityService.findActivityByTownid(townid);
+    }
 }

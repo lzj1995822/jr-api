@@ -9,6 +9,7 @@ import com.cloudkeeper.leasing.identity.domain.*;
 import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
 import com.cloudkeeper.leasing.identity.repository.ActivityRepository;
 import com.cloudkeeper.leasing.identity.service.*;
+import com.cloudkeeper.leasing.identity.vo.ActivityVO;
 import com.cloudkeeper.leasing.identity.vo.CountActivity1Vo;
 import com.cloudkeeper.leasing.identity.vo.CountVO;
 import com.querydsl.core.BooleanBuilder;
@@ -138,5 +139,19 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
                 "\tjc.townid";
         Long total=super.findOneBySql(CountVO.class, sql1).getCount();
         return new RestPageImpl<>(super.findAllListBySql(CountActivity1Vo.class, sql), pageable,total);
+    }
+
+    public List<ActivityVO>  findActivityByTownid(String townid){
+        String sql="SELECT ja.* FROM\n" +
+                "\n" +
+                "jr_town_activity jta,\n" +
+                "jr_activity ja\n" +
+                "\n" +
+                "WHERE\n" +
+                "\n" +
+                "jta.activityId=ja.id\n" +
+                "AND\n" +
+                "jta.townid=\n"+"'"+townid+"'";
+        return super.findAllListBySql(ActivityVO.class,sql);
     }
 }
