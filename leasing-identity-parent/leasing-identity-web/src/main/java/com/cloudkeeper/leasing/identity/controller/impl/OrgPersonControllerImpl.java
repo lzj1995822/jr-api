@@ -12,6 +12,7 @@ import com.cloudkeeper.leasing.identity.vo.OrgPersonVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class OrgPersonControllerImpl extends BaseControllerImpl<OrgPerson, OrgPe
     }
 
     @Override
-    public Result<List<OrgPersonVO>> list(OrgPersonSearchable searchable, Sort sort) {
+    public Result<List<OrgPersonVO>> list(@RequestBody OrgPersonSearchable searchable, Sort sort) {
         List<OrgPerson> all = orgPersonService.findAll(searchable, sort);
         return super.list(searchable, sort);
     }

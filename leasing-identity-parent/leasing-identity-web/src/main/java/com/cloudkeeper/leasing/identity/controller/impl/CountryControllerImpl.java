@@ -13,9 +13,12 @@ import com.cloudkeeper.leasing.identity.service.JrResourceService;
 import com.cloudkeeper.leasing.identity.vo.CountryVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +46,16 @@ public class CountryControllerImpl extends BaseControllerImpl<Country, CountryDT
             List<JrResource> jrResourceList= jrResourceService.findByConnectId(countryVO.getId());
             countryVO.setJrResourceList(jrResourceList);
         }
-
         return countryVOList;
+    }
+
+    @Override
+    public Result<Page<CountryVO>> page(CountrySearchable searchable, Pageable pageable) {
+        Result<Page<CountryVO>> page = super.page(searchable, pageable);
+        for (CountryVO countryVO:page.getContent()){
+            List<JrResource> jrResourceList= jrResourceService.findByConnectId(countryVO.getId());
+            countryVO.setJrResourceList(jrResourceList);
+        }
+        return page;
     }
 }
