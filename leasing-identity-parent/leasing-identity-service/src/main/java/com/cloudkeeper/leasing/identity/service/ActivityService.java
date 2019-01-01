@@ -4,6 +4,7 @@ import com.cloudkeeper.leasing.base.utils.RestPageImpl;
 import com.cloudkeeper.leasing.identity.domain.Activity;
 import com.cloudkeeper.leasing.base.service.BaseService;
 import com.cloudkeeper.leasing.identity.dto.activity.ActivitySearchable;
+import com.cloudkeeper.leasing.identity.vo.ActivityVO;
 import com.cloudkeeper.leasing.identity.vo.CountActivity1Vo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,4 +28,5 @@ public interface ActivityService extends BaseService<Activity> {
     @Override
     Activity save(@Nonnull Activity entity);
     RestPageImpl<CountActivity1Vo> countRecordlist(Pageable pageable) ;
+    List<ActivityVO>  findActivityByTownid(String townid);
 }
