@@ -56,6 +56,10 @@ public class OrgCenterVO extends BaseVO {
     @ApiModelProperty(value = "路径", position = 22)
     private String path;
 
+    /** 描述 */
+    @ApiModelProperty(value = "描述", position = 22)
+    private String des;
+
     /** 功能分中心图片集合 */
     @ApiModelProperty(value = "功能分中心图片集合", position = 22)
     private List<JrResource> jrResourceList;

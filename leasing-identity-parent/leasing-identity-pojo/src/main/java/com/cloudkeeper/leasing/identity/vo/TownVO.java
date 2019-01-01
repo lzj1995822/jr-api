@@ -34,12 +34,17 @@ public class TownVO extends BaseVO {
     /** 名称 */
     @ApiModelProperty(value = "名称", position = 12)
     private String name;
+
     /** 市id */
     @ApiModelProperty(value = "市id", position = 14)
     private String cityid;
 
+    /** 图片 */
+    @ApiModelProperty(value = "图片", position = 16)
+    private String path;
+
     /** 镇图片集合 */
-    @ApiModelProperty(value = "镇图片集合", position = 16)
+    @ApiModelProperty(value = "镇图片集合", position = 18)
     private List<JrResource> jrResourceList;
 
 }

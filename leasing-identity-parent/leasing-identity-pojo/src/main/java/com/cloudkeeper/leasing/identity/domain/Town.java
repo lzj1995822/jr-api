@@ -34,7 +34,12 @@ public class Town extends BaseEntity {
     /** 名称 */
     @ApiModelProperty(value = "名称", position = 12)
     private String name;
+
     /** 市id */
     @ApiModelProperty(value = "市id", position = 14)
     private String cityid;
+
+    /** 图片 */
+    @ApiModelProperty(value = "图片", position = 16)
+    private String path;
 }
