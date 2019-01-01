@@ -1,6 +1,7 @@
 package com.cloudkeeper.leasing.identity.controller.impl;
 
 import com.cloudkeeper.leasing.base.controller.impl.BaseControllerImpl;
+import com.cloudkeeper.leasing.base.model.Result;
 import com.cloudkeeper.leasing.base.service.BaseService;
 import com.cloudkeeper.leasing.identity.controller.PointController;
 import com.cloudkeeper.leasing.identity.domain.Point;
@@ -10,6 +11,8 @@ import com.cloudkeeper.leasing.identity.service.PointService;
 import com.cloudkeeper.leasing.identity.vo.PointVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -28,4 +31,8 @@ public class PointControllerImpl extends BaseControllerImpl<Point, PointDTO, Poi
     return pointService;
     }
 
+    @Override
+    public Result<Page<PointVO>> page(PointSearchable searchable, Pageable pageable) {
+        return super.page(searchable, pageable);
+    }
 }

@@ -41,5 +41,8 @@ public class NoticeVO extends BaseVO {
     @ApiModelProperty(value = "发布单位", position = 14)
     private String creator;
 
+    /** 文化类型 */
+    @ApiModelProperty(value = "文化类型", position = 16)
+    private String type;
 
 }

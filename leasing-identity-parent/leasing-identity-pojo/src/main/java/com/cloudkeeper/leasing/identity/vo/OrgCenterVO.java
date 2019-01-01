@@ -51,7 +51,11 @@ public class OrgCenterVO extends BaseVO {
     /** 纬度 */
     @ApiModelProperty(value = "纬度", position = 20)
     private String locateY;
-    
+
+    /** 名称 */
+    @ApiModelProperty(value = "路径", position = 22)
+    private String path;
+
     /** 功能分中心图片集合 */
     @ApiModelProperty(value = "功能分中心图片集合", position = 22)
     private List<JrResource> jrResourceList;

@@ -49,4 +49,8 @@ public class OrgCenterDTO extends BaseEditDTO {
     @ApiModelProperty(value = "纬度", position = 20)
     private String locateY;
 
+    /** 名称 */
+    @ApiModelProperty(value = "路径", position = 22)
+    private String path;
+
 }
