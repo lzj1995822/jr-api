@@ -3,15 +3,15 @@ package com.cloudkeeper.leasing.identity.service.impl;
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import com.cloudkeeper.leasing.base.service.impl.BaseServiceImpl;
 import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
-import com.cloudkeeper.leasing.identity.domain.Record;
-import com.cloudkeeper.leasing.identity.domain.RecordHistory;
+import com.cloudkeeper.leasing.identity.domain.*;
+import com.cloudkeeper.leasing.identity.dto.record.RecordSearchable;
 import com.cloudkeeper.leasing.identity.repository.RecordRepository;
-import com.cloudkeeper.leasing.identity.service.RecordHistoryService;
-import com.cloudkeeper.leasing.identity.service.RecordService;
+import com.cloudkeeper.leasing.identity.service.*;
 import com.cloudkeeper.leasing.identity.vo.CountRateVO;
 import com.cloudkeeper.leasing.identity.vo.CountRecordVO;
 import com.cloudkeeper.leasing.identity.vo.CountTimeVO;
 import com.cloudkeeper.leasing.identity.vo.CountVO;
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nonnull;
@@ -19,10 +19,14 @@ import javax.annotation.Nonnull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 活动记录 service
@@ -36,6 +40,14 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
     private final RecordRepository recordRepository;
     
     private final RecordHistoryService recordHistoryService;
+
+    private final PrincipalService principalService;
+
+    private final OrgRoomService orgRoomService;
+
+    private final OrgCenterService orgCenterService;
+
+    private final CountryService countryService;
 
     @Override
     protected BaseRepository<Record> getBaseRepository() {
@@ -417,5 +429,29 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
             recordList.add(record);
         }
         return super.saveList(recordList);
+    }
+
+    @Override
+    public Page<Record> getSearchByRole(RecordSearchable searchable, Pageable pageable) {
+        Principal principal = (Principal)((Optional) principalService.getCurrentPrincipal()).get();
+        QRecord qRecord = QRecord.record;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        String orgId = principal.getOrgId();
+        if (ProcessConstants.ORG_CENTER.equals(principal.getType())){
+            OrgCenter orgCenter = orgCenterService.findById(orgId);
+            booleanBuilder.and(qRecord.activity.activityType.eq(orgCenter.getType()));
+            booleanBuilder.and(qRecord.status.eq(ProcessConstants.RECORD_TOWN_PASSED).or(qRecord.status.eq(ProcessConstants.RECORD_CITY_PASSED)));
+        } else if (ProcessConstants.ORG_ROOM.equals(principal.getType())) {
+            OrgRoom orgRoom = orgRoomService.findById(orgId);
+            List<Country> allByTownId = countryService.findAllByTownId(orgRoom.getTownId());
+            List<Principal> allByOrgIdIn = principalService.findAllByOrgIdIn(allByTownId.stream().map(Country::getId).collect(Collectors.toList()));
+            booleanBuilder.and(qRecord.activity.activityType.eq(orgRoom.getType()));
+            booleanBuilder.and(qRecord.status.eq(ProcessConstants.RECORD_COMMITED));
+            booleanBuilder.and(qRecord.createdBy.in(allByOrgIdIn.stream().map(Principal::getId).collect(Collectors.toList())));
+        } else if  (ProcessConstants.ORG_COUNTRY.equals(principal.getType())){
+            booleanBuilder.and(qRecord.createdBy.eq(principal.getId()));
+            booleanBuilder.and(qRecord.status.eq(ProcessConstants.RECORD_UNFINSHED));
+        }
+        return super.findAll(booleanBuilder, pageable);
     }
 }

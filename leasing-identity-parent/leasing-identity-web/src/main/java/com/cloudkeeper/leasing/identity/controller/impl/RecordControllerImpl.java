@@ -115,8 +115,8 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
 
     @Override
     public Result<Page<Record>> domainPage(@RequestBody RecordSearchable searchable, Pageable pageable) {
-        Page<Record> all = recordService.findAll(searchable, pageable);
-        return Result.of(all);
+        Page<Record> page = recordService.getSearchByRole(searchable, pageable);
+        return Result.of(page);
     }
 
 }

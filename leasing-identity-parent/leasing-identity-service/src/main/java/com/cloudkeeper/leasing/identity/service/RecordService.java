@@ -2,9 +2,12 @@ package com.cloudkeeper.leasing.identity.service;
 
 import com.cloudkeeper.leasing.identity.domain.Record;
 import com.cloudkeeper.leasing.base.service.BaseService;
+import com.cloudkeeper.leasing.identity.dto.record.RecordSearchable;
 import com.cloudkeeper.leasing.identity.vo.CountRateVO;
 import com.cloudkeeper.leasing.identity.vo.CountRecordVO;
 import com.cloudkeeper.leasing.identity.vo.CountTimeVO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -32,4 +35,5 @@ public interface RecordService extends BaseService<Record> {
     List<CountRateVO> CountRateVO();
     List<CountRateVO> CountScoreRateVO();
     List<Record> addAllReord(String countryId,List<String> artivityId);
+    Page<Record> getSearchByRole(RecordSearchable searchable, Pageable pageable);
 }
