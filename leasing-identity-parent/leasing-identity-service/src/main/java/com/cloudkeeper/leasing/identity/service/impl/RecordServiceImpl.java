@@ -405,7 +405,7 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
         return countRateVOList;
 
     }
-    public List<Record> addAllReord(String countryId,String [] artivityId){
+    public List<Record> addAllReord(String countryId,List<String> artivityId){
         List<Record> recordList=new ArrayList<>();
 
         for (String s:artivityId){

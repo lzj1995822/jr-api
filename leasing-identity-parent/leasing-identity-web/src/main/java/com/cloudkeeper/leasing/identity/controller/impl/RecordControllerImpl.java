@@ -13,6 +13,8 @@ import com.cloudkeeper.leasing.identity.vo.CountTimeVO;
 import com.cloudkeeper.leasing.identity.vo.RecordVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -104,7 +106,7 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
     public  List<CountRateVO> CountScoreRateVO(){
         return recordService.CountScoreRateVO();
     }
-    public List<Record> addAllReord(String countryId,String [] artivityId){
-        return recordService.addAllReord(countryId, artivityId);
+    public List<Record> addAllReord(@PathVariable String countryId, @RequestBody List<String> activityId){
+        return recordService.addAllReord(countryId, activityId);
     }
 }

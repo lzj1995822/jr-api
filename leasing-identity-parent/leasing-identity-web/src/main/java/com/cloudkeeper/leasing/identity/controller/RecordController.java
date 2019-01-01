@@ -10,9 +10,7 @@ import com.cloudkeeper.leasing.identity.vo.CountTimeVO;
 import com.cloudkeeper.leasing.identity.vo.RecordVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -100,7 +98,7 @@ public interface RecordController extends BaseController<RecordDTO, RecordSearch
 
 
     @ApiModelProperty(value = "批量插入执行活动", position = 28, required = true)
-    @PostMapping("/addAllReord")
-    List<Record> addAllReord(String countryId, String [] artivityId);
+    @PostMapping("/addAllReord/{countryId}")
+    List<Record> addAllReord(@PathVariable String countryId,@RequestBody List<String> activityId);
 
 }
