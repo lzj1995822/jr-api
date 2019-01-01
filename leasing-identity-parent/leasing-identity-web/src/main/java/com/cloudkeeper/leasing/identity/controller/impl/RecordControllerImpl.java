@@ -104,4 +104,7 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
     public  List<CountRateVO> CountScoreRateVO(){
         return recordService.CountScoreRateVO();
     }
+    public List<Record> addAllReord(String countryId,String [] artivityId){
+        return recordService.addAllReord(countryId, artivityId);
+    }
 }

@@ -1,6 +1,7 @@
 package com.cloudkeeper.leasing.identity.controller;
 
 import com.cloudkeeper.leasing.base.controller.BaseController;
+import com.cloudkeeper.leasing.identity.domain.Record;
 import com.cloudkeeper.leasing.identity.dto.record.RecordDTO;
 import com.cloudkeeper.leasing.identity.dto.record.RecordSearchable;
 import com.cloudkeeper.leasing.identity.vo.CountRateVO;
@@ -10,6 +11,7 @@ import com.cloudkeeper.leasing.identity.vo.RecordVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -95,5 +97,10 @@ public interface RecordController extends BaseController<RecordDTO, RecordSearch
     @ApiModelProperty(value = "统计不同类型的活动占比积分", position = 27, required = true)
     @GetMapping("/CountScoreRateVO")
     List<CountRateVO> CountScoreRateVO();
+
+
+    @ApiModelProperty(value = "批量插入执行活动", position = 28, required = true)
+    @PostMapping("/addAllReord")
+    List<Record> addAllReord(String countryId, String [] artivityId);
 
 }

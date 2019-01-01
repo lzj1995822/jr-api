@@ -31,4 +31,5 @@ public interface RecordService extends BaseService<Record> {
     List<CountTimeVO> countRecordScoreByYearCountry();
     List<CountRateVO> CountRateVO();
     List<CountRateVO> CountScoreRateVO();
+    List<Record> addAllReord(String countryId,String [] artivityId);
 }
