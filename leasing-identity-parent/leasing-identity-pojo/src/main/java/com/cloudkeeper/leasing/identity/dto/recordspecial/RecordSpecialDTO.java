@@ -41,10 +41,6 @@ public class RecordSpecialDTO extends BaseEditDTO {
     @ApiModelProperty(value = "活动内容", position = 16)
     private String content;
 
-    /** 是否为特色活动 */
-    @ApiModelProperty(value = "是否为特色活动", position = 18)
-    private Integer isSpecial;
-
     /** 积分 */
     @ApiModelProperty(value = "积分", position = 20)
     private Double score;

@@ -53,4 +53,8 @@ public class OrgCenterDTO extends BaseEditDTO {
     @ApiModelProperty(value = "路径", position = 22)
     private String path;
 
+    /** 描述 */
+    @ApiModelProperty(value = "描述", position = 22)
+    private String des;
+
 }
