@@ -57,4 +57,8 @@ public class OrgRoomVO extends BaseVO {
     @ApiModelProperty(value = "功能室图片集合", position = 24)
     private List<JrResource> jrResourceList;
 
+    /** 镇名 */
+    @ApiModelProperty(value = "镇名", position = 22)
+    private String townName;
+
 }

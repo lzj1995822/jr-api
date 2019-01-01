@@ -1,6 +1,7 @@
 package com.cloudkeeper.leasing.identity.controller.impl;
 
 import com.cloudkeeper.leasing.base.controller.impl.BaseControllerImpl;
+import com.cloudkeeper.leasing.base.model.Result;
 import com.cloudkeeper.leasing.base.service.BaseService;
 import com.cloudkeeper.leasing.identity.controller.RecordController;
 import com.cloudkeeper.leasing.identity.domain.Record;
@@ -13,6 +14,8 @@ import com.cloudkeeper.leasing.identity.vo.CountTimeVO;
 import com.cloudkeeper.leasing.identity.vo.RecordVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -106,7 +109,14 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
     public  List<CountRateVO> CountScoreRateVO(){
         return recordService.CountScoreRateVO();
     }
-    public List<Record> addAllReord(@PathVariable String countryId, @RequestBody List<String> activityId){
-        return recordService.addAllReord(countryId, activityId);
+    public Result<List<Record>> addAllReord(@PathVariable String countryId, @RequestBody List<String> activityId){
+        return Result.of(recordService.addAllReord(countryId, activityId));
     }
+
+    @Override
+    public Result<Page<Record>> domainPage(@RequestBody RecordSearchable searchable, Pageable pageable) {
+        Page<Record> all = recordService.findAll(searchable, pageable);
+        return Result.of(all);
+    }
+
 }

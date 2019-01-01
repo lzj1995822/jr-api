@@ -9,6 +9,7 @@ public class ProcessConstants {
     public static final String ACTIVITY_REJECTED = "ACTIVITY_REJECTED";	//驳回
 
     /** record流程*/
+    public static final String RECORD_UNFINSHED = "RECORD_UNFINSHED"; //记录提交
     public static final String RECORD_COMMITED = "RECORD_COMMITED"; //记录提交
     public static final String RECORD_TOWN_PASSED = "RECORD_TOWN_PASSED";	//记录镇通过
     public static final String RECORD_CITY_PASSED = "RECORD_CITY_PASSED";	//记录市通过

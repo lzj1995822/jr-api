@@ -71,7 +71,6 @@ public class Record extends BaseEntity {
     
     /** 活动 */
     @ApiModelProperty(value = "活动", position = 26, required = true)
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "activityId", insertable = false, updatable = false)
     private Activity activity;

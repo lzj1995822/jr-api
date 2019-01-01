@@ -15,9 +15,14 @@ import com.cloudkeeper.leasing.identity.vo.CountryVO;
 import com.cloudkeeper.leasing.identity.vo.OrgRoomVO;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,5 +52,17 @@ public class OrgRoomControllerImpl extends BaseControllerImpl<OrgRoom, OrgRoomDT
 		}
 		return OrgRoomVOList;
 	}
-  
+
+	@Override
+	public Result<Page<OrgRoomVO>> page(OrgRoomSearchable searchable, Pageable pageable) {
+		Page<OrgRoom> all = orgRoomService.findAll(searchable, pageable);
+		List<OrgRoomVO> orgRoomVOS = new ArrayList<>();
+		all.getContent().stream().forEach(item -> {
+			OrgRoomVO orgRoomVO = new OrgRoomVO();
+			BeanUtils.copyProperties(item, orgRoomVO);
+			orgRoomVO.setTownName(item.getName());
+		});
+		Page<OrgRoomVO> orgRoomVOS1 = new PageImpl<>(orgRoomVOS, pageable, all.getTotalElements());
+		return Result.of(orgRoomVOS1);
+	}
 }

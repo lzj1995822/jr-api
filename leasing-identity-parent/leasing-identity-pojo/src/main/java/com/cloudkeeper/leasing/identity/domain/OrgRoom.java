@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 功能室
@@ -54,5 +52,9 @@ public class OrgRoom extends BaseEntity {
     /** 描述 */
     @ApiModelProperty(value = "描述", position = 22)
     private String des;
+
+    @ManyToOne
+    @JoinColumn(name = "townId", updatable = false, insertable = false)
+    private Town town;
 
 }

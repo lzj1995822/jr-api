@@ -2,6 +2,7 @@ package com.cloudkeeper.leasing.identity.service.impl;
 
 import com.cloudkeeper.leasing.base.repository.BaseRepository;
 import com.cloudkeeper.leasing.base.service.impl.BaseServiceImpl;
+import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
 import com.cloudkeeper.leasing.identity.domain.Record;
 import com.cloudkeeper.leasing.identity.domain.RecordHistory;
 import com.cloudkeeper.leasing.identity.repository.RecordRepository;
@@ -412,6 +413,7 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
             Record record=new Record();
             record.setCountryId(countryId);
             record.setActivityId(s);
+            record.setStatus(ProcessConstants.RECORD_UNFINSHED);
             recordList.add(record);
         }
         return super.saveList(recordList);
