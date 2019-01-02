@@ -58,7 +58,8 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
     public ExampleMatcher defaultExampleMatcher() {
         return super.defaultExampleMatcher()
                 .withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains())
-                .withMatcher("content", ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("content", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("createdBy", ExampleMatcher.GenericPropertyMatchers.contains());
     }
 
     @Nonnull
@@ -451,6 +452,27 @@ public class RecordServiceImpl extends BaseServiceImpl<Record> implements Record
         } else if  (ProcessConstants.ORG_COUNTRY.equals(principal.getType())){
             booleanBuilder.and(qRecord.createdBy.eq(principal.getId()));
             booleanBuilder.and(qRecord.status.eq(ProcessConstants.RECORD_UNFINSHED));
+        }
+        return super.findAll(booleanBuilder, pageable);
+    }
+
+    @Override
+    public Page<Record> pageByRole(RecordSearchable searchable, Pageable pageable) {
+        Principal principal = (Principal)((Optional) principalService.getCurrentPrincipal()).get();
+        QRecord qRecord = QRecord.record;
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        String orgId = principal.getOrgId();
+        if (ProcessConstants.ORG_CENTER.equals(principal.getType())){
+            OrgCenter orgCenter = orgCenterService.findById(orgId);
+            booleanBuilder.and(qRecord.activity.activityType.eq(orgCenter.getType()));
+        } else if (ProcessConstants.ORG_ROOM.equals(principal.getType())) {
+            OrgRoom orgRoom = orgRoomService.findById(orgId);
+            List<Country> allByTownId = countryService.findAllByTownId(orgRoom.getTownId());
+            List<Principal> allByOrgIdIn = principalService.findAllByOrgIdIn(allByTownId.stream().map(Country::getId).collect(Collectors.toList()));
+            booleanBuilder.and(qRecord.activity.activityType.eq(orgRoom.getType()));
+            booleanBuilder.and(qRecord.createdBy.in(allByOrgIdIn.stream().map(Principal::getId).collect(Collectors.toList())));
+        } else if  (ProcessConstants.ORG_COUNTRY.equals(principal.getType())){
+            booleanBuilder.and(qRecord.createdBy.eq(principal.getId()));
         }
         return super.findAll(booleanBuilder, pageable);
     }

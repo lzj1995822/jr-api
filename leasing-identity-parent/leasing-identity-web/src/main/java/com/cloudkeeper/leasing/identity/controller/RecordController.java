@@ -109,4 +109,8 @@ public interface RecordController extends BaseController<RecordDTO, RecordSearch
     @PostMapping("/domain/page")
     Result<Page<Record>> domainPage(@ApiParam(value = "查询条件", required = true) @RequestBody RecordSearchable searchable,
                                           @ApiParam(value = "分页条件", required = true) Pageable pageable);
+
+    @ApiModelProperty(value = "活动状态分页", position = 27, required = true)
+    @PostMapping("/status/page")
+    Result<Page<Record>> pageByRole(RecordSearchable searchable, Pageable pageable);
 }

@@ -3,10 +3,13 @@ package com.cloudkeeper.leasing.identity.controller.impl;
 import com.cloudkeeper.leasing.base.controller.impl.BaseControllerImpl;
 import com.cloudkeeper.leasing.base.model.Result;
 import com.cloudkeeper.leasing.base.service.BaseService;
+import com.cloudkeeper.leasing.identity.constant.ProcessConstants;
 import com.cloudkeeper.leasing.identity.controller.RecordController;
+import com.cloudkeeper.leasing.identity.domain.Principal;
 import com.cloudkeeper.leasing.identity.domain.Record;
 import com.cloudkeeper.leasing.identity.dto.record.RecordDTO;
 import com.cloudkeeper.leasing.identity.dto.record.RecordSearchable;
+import com.cloudkeeper.leasing.identity.service.PrincipalService;
 import com.cloudkeeper.leasing.identity.service.RecordService;
 import com.cloudkeeper.leasing.identity.vo.CountRateVO;
 import com.cloudkeeper.leasing.identity.vo.CountRecordVO;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 活动记录 controller
@@ -32,6 +36,8 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
 
     /** 活动记录 service */
     private final RecordService recordService;
+
+    private final PrincipalService principalService;
 
     @Override
     protected BaseService<Record> getBaseService() {
@@ -119,4 +125,9 @@ public class RecordControllerImpl extends BaseControllerImpl<Record, RecordDTO, 
         return Result.of(page);
     }
 
+    @Override
+    public Result<Page<Record>> pageByRole(RecordSearchable searchable, Pageable pageable) {
+        Page<Record> page = recordService.pageByRole(searchable, pageable);
+        return Result.of(page);
+    }
 }

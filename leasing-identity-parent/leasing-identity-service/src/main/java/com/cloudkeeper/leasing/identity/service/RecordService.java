@@ -36,4 +36,6 @@ public interface RecordService extends BaseService<Record> {
     List<CountRateVO> CountScoreRateVO();
     List<Record> addAllReord(String countryId,List<String> artivityId);
     Page<Record> getSearchByRole(RecordSearchable searchable, Pageable pageable);
+
+    Page<Record> pageByRole(RecordSearchable searchable, Pageable pageable);
 }

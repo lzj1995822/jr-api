@@ -57,4 +57,8 @@ public class RecordSearchable extends BaseSearchable {
     @ApiModelProperty(value = "志愿者", position = 24)
     private String volunteers;
 
+    /** 创建人 */
+    @ApiModelProperty(value = "创建人", position = 24)
+    private String createdBy;
+
 }
