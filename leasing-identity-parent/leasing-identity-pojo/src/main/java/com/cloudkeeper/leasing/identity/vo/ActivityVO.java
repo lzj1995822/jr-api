@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 活动 VO
@@ -51,11 +52,11 @@ public class ActivityVO extends BaseVO {
 
     /** 开始时间 */
     @ApiModelProperty(value = "开始时间", position = 22)
-    private LocalDateTime beginAt;
+    private Date beginAt;
 
     /** 结束时间 */
     @ApiModelProperty(value = "结束时间", position = 24)
-    private LocalDateTime endAt;
+    private Date endAt;
 
     /** 活动类型 */
     @ApiModelProperty(value = "活动类型", position = 28)

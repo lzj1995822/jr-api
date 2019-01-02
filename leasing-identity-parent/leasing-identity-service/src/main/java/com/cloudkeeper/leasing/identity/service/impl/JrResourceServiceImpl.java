@@ -118,7 +118,7 @@ public class JrResourceServiceImpl extends BaseServiceImpl<JrResource> implement
             JrResource jrResource = new JrResource();
 
             try {
-                Thumbnails.of(file+"//"+newFileName).size(80,80).toFile(file+"//new"+newFileName);
+                Thumbnails.of(file+"//"+newFileName).size(240,240).toFile(file+"//new"+newFileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
